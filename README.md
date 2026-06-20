@@ -81,6 +81,7 @@ Lập trình bằng AI (Cursor): bạn mô tả → AI code → bạn test.
 
 | Tài liệu | Nội dung |
 |----------|----------|
+| [Business/11_MODULAR_CODEBASE_PLAN.md](./Business/11_MODULAR_CODEBASE_PLAN.md) | **18 module** — thứ tự hoàn thiện codebase |
 | [Business/10_NO_CODE_MASTER_PLAN_FROM_DOC.md](./Business/10_NO_CODE_MASTER_PLAN_FROM_DOC.md) | **Tổng hợp `doc/`** — 45 session, 7 phase (bắt đầu từ đây) |
 | [doc/NO_CODE_INDEX.md](./doc/NO_CODE_INDEX.md) | Index 118 file doc → đọc khi nào |
 | [Business/09_NO_CODE_PLAN_A_TO_Z.md](./Business/09_NO_CODE_PLAN_A_TO_Z.md) | A→Z bám README — 30 session |

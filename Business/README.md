@@ -16,5 +16,6 @@ Thư mục tài liệu chiến lược cho dự án **avasec** (thương hiệu 
 | 08 | [08_VIBE_CODING_PLAN.md](./08_VIBE_CODING_PLAN.md) | Kế hoạch vibe coding — 8 sóng Q3 2026 |
 | 09 | [09_NO_CODE_PLAN_A_TO_Z.md](./09_NO_CODE_PLAN_A_TO_Z.md) | **A→Z từ README** — offline + portal lite, 30 session |
 | 10 | [10_NO_CODE_MASTER_PLAN_FROM_DOC.md](./10_NO_CODE_MASTER_PLAN_FROM_DOC.md) | **Tổng hợp từ `doc/`** — 45 session, 7 phase, 8–10 tuần |
+| 11 | [11_MODULAR_CODEBASE_PLAN.md](./11_MODULAR_CODEBASE_PLAN.md) | **Codebase theo 18 module** — thứ tự phụ thuộc, % hoàn thiện |
 
 Cập nhật: 2026-06-17
