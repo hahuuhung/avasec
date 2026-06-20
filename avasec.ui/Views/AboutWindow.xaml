@@ -1,0 +1,158 @@
+<Window x:Class="AVASec.UI.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Về AVA Security / About AVA Security"
+        Height="520" Width="480"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize">
+
+    <Border Background="{StaticResource ContentBgBrush}" CornerRadius="16" 
+            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" BlurRadius="20" Opacity="0.2" ShadowDepth="0"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header / Tiêu đề -->
+            <Border Grid.Row="0" Padding="24,20" CornerRadius="16,16,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#0F172A" Offset="0"/>
+                        <GradientStop Color="#1E293B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🛡️" FontSize="36" VerticalAlignment="Center"/>
+                        <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock FontSize="24" FontWeight="Bold" Foreground="White">
+                                <Run Text="AVA Security"/>
+                                <Run Text=" Ultra" Foreground="#06B6D4"/>
+                            </TextBlock>
+                            <TextBlock Text="Ultimate System Care &amp; Security" 
+                                       FontSize="11" Foreground="#8E99A4" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Background="Transparent" Foreground="#8E99A4" BorderThickness="0"
+                            FontSize="16" Cursor="Hand" Click="CloseButton_Click"
+                            Width="28" Height="28"/>
+                </Grid>
+            </Border>
+
+            <!-- Content / Nội dung -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24,16">
+                <StackPanel>
+                    <!-- Version Info / Thông tin phiên bản -->
+                    <Border Background="{StaticResource CardBgBrush}" CornerRadius="10" Padding="16" 
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Phiên bản / Version" FontSize="11" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock x:Name="VersionText" Text="v2.0.0" FontSize="20" 
+                                           FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Build Date" FontSize="11" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock x:Name="BuildDateText" Text="2026-05-21" FontSize="14" 
+                                           Foreground="{StaticResource TextPrimaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- License Info / Thông tin giấy phép -->
+                    <Border Background="{StaticResource CardBgBrush}" CornerRadius="10" Padding="16" 
+                            Margin="0,12,0,0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="📋 Giấy phép / License" FontSize="13" FontWeight="SemiBold" 
+                                       Foreground="{StaticResource TextPrimaryBrush}"/>
+                            <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,8"/>
+                            <Grid Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Gói / Plan:" Grid.Row="0" FontSize="12" Margin="0,4"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock x:Name="LicenseTierText" Grid.Row="0" Grid.Column="1" 
+                                           FontSize="12" FontWeight="SemiBold" Margin="12,4"
+                                           Foreground="{StaticResource AccentBlueBrush}" Text="Free"/>
+
+                                <TextBlock Text="Hết hạn / Expires:" Grid.Row="1" FontSize="12" Margin="0,4"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock x:Name="LicenseExpiryText" Grid.Row="1" Grid.Column="1" 
+                                           FontSize="12" Margin="12,4" 
+                                           Foreground="{StaticResource TextPrimaryBrush}" Text="N/A"/>
+
+                                <TextBlock Text="Còn lại / Remaining:" Grid.Row="2" FontSize="12" Margin="0,4"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock x:Name="LicenseRemainingText" Grid.Row="2" Grid.Column="1" 
+                                           FontSize="12" Margin="12,4"
+                                           Foreground="{StaticResource TextPrimaryBrush}" Text="-"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contact Info / Thông tin liên hệ -->
+                    <Border Background="{StaticResource CardBgBrush}" CornerRadius="10" Padding="16" 
+                            Margin="0,12,0,0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="📞 Liên hệ / Contact" FontSize="13" FontWeight="SemiBold" 
+                                       Foreground="{StaticResource TextPrimaryBrush}"/>
+                            <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,8"/>
+                            <TextBlock FontSize="12" Margin="0,4" Foreground="{StaticResource TextSecondaryBrush}">
+                                <Run Text="🌐 Website: "/>
+                                <Run Text="https://sysanti.com" Foreground="{StaticResource AccentBlueBrush}"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12" Margin="0,4" Foreground="{StaticResource TextSecondaryBrush}">
+                                <Run Text="📧 Email: "/>
+                                <Run Text="support@sysanti.com" Foreground="{StaticResource AccentBlueBrush}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Footer / Chân trang -->
+            <Border Grid.Row="2" Padding="24,12" BorderBrush="{StaticResource BorderBrush}" 
+                    BorderThickness="0,1,0,0">
+                <Grid>
+                    <TextBlock Text="© 2026 AVA Security Team. All rights reserved."
+                               FontSize="10" Foreground="{StaticResource TextMutedBrush}"
+                               VerticalAlignment="Center"/>
+                    <Button Content="Đóng / Close" HorizontalAlignment="Right"
+                            Padding="16,8" FontSize="12" Background="{StaticResource AccentBlueBrush}"
+                            Foreground="White" BorderThickness="0" Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

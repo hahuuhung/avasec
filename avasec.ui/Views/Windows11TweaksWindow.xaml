@@ -1,0 +1,127 @@
+<Window x:Class="AVASec.UI.Views.Windows11TweaksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Windows 11 Master - AVA Security" 
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40" GlassFrameThickness="0" CornerRadius="12"/>
+    </WindowChrome.WindowChrome>
+
+    <Border Background="{StaticResource MainBackgroundGradient}" CornerRadius="12" BorderBrush="{StaticResource BorderGlowBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>  <!-- Title Bar -->
+                <RowDefinition Height="Auto"/>  <!-- Hero Header -->
+                <RowDefinition Height="*"/>     <!-- Tweaks List -->
+                <RowDefinition Height="Auto"/>  <!-- Footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Border Grid.Row="0" Background="{StaticResource DarkSurfaceBrush}" 
+                    CornerRadius="12,12,0,0" MouseLeftButtonDown="TitleBar_MouseDown" Height="40">
+                <Grid Margin="15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Click="Back_Click" Style="{StaticResource IconButtonStyle}" ToolTip="Back">
+                        <TextBlock Text="←" FontSize="18" Margin="0,-2,0,0"/>
+                    </Button>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="🚀" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Windows 11 Master" Style="{StaticResource Heading2Style}" Margin="0" FontSize="16"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="👤" x:Name="UserButton" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="UserButton_Click" Foreground="White" ToolTip="Login / Đăng nhập" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="💬" x:Name="ChatToggleButton" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="ChatToggle_Click" Foreground="White" Margin="0,0,5,0" ToolTip="Support Chat (Dashboard) / Hỗ trợ Chat" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="⚙" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="Settings_Click" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="☰" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="Toolbox_Click" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="─" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="MinimizeButton_Click" Foreground="White" ToolTip="Minimize to Taskbar / Thu nhỏ xuống thanh tác vụ" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="➘" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="TrayButton_Click" Foreground="White" ToolTip="Hide / Ẩn" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="✕" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="CloseButton_Click" Foreground="White" ToolTip="Close / Đóng" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Hero Header -->
+            <Border Grid.Row="1" Margin="20,20,20,0" CornerRadius="12">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#1E293B" Offset="0"/>
+                        <GradientStop Color="#0F172A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="4" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid Margin="25,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Tối ưu hóa Windows 11 / Windows 11 Optimization" 
+                                  FontSize="24" FontWeight="Bold" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBlock Text="Tinh chỉnh chuyên sâu cho hệ điều hành Windows 11 để đạt hiệu suất tối đa.&#x0a;Deep optimization for Windows 11 OS to achieve maximum performance." 
+                                  FontSize="14" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    
+                    <!-- Quick Actions -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="⚡ Gaming Mode" Click="ApplyGamingMode_Click" 
+                                Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,10,0"/>
+                        <Button Content="🔄 Reset Defaults" Click="ResetDefaults_Click" 
+                                Style="{StaticResource SecondaryButtonStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Tweaks List -->
+            <ScrollViewer Grid.Row="2" Margin="20,20,20,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="TweaksContainer" Margin="0,0,0,20">
+                    <!-- Tweaks will be added here dynamically -->
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Footer -->
+            <Border Grid.Row="3" Background="{StaticResource DarkSurfaceBrush}" 
+                    Padding="20,15" CornerRadius="0,0,12,12" BorderBrush="{StaticResource DarkBorderBrush}" BorderThickness="0,1,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💡" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource WarningBrush}"/>
+                        <TextBlock VerticalAlignment="Center">
+                            <Run Text="Pro Tip: " FontWeight="Bold" Foreground="{StaticResource WarningBrush}"/>
+                            <Run Text="Kích hoạt 'Gaming Tweaks' để tắt các dịch vụ nền không cần thiết khi chơi game.&#x0a;Enable 'Gaming Tweaks' to disable unnecessary background services while gaming." 
+                                 Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="StatusText" 
+                                  Text="Sẵn sàng / Ready" 
+                                  Foreground="{StaticResource TextSecondaryBrush}"
+                                  FontSize="12"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,15,0"/>
+                        <Button Content="Close" Click="CloseButton_Click" Style="{StaticResource SecondaryButtonStyle}" Padding="15,6" Height="30" FontSize="12"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

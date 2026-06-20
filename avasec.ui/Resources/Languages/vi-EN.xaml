@@ -1,0 +1,191 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- General -->
+    <system:String x:Key="Lang.App.Title">AVA Security - Tiện ích Hệ thống / System Utilities</system:String>
+    <system:String x:Key="Lang.Common.Close">Đóng / Close</system:String>
+    <system:String x:Key="Lang.Common.Cancel">Hủy / Cancel</system:String>
+    <system:String x:Key="Lang.Common.Save">Lưu / Save</system:String>
+    <system:String x:Key="Lang.Common.Refresh">Làm mới / Refresh</system:String>
+    
+    <!-- Navigation -->
+    <system:String x:Key="Lang.Nav.Overview">Tổng quan / Overview</system:String>
+    <system:String x:Key="Lang.Nav.OneClick">Bảo trì 1-Click / 1-Click Maintenance</system:String>
+    <system:String x:Key="Lang.Nav.CleanRepair">Dọn dẹp &amp; Sửa lỗi / Clean Up &amp; Repair</system:String>
+    <system:String x:Key="Lang.Nav.Optimization">Tăng tốc &amp; Tối ưu / Speed Up &amp; Optimize</system:String>
+    <system:String x:Key="Lang.Nav.Protection">Bảo vệ &amp; Riêng tư / Protection &amp; Privacy</system:String>
+    <system:String x:Key="Lang.Nav.Toolbox">Hộp công cụ / Toolbox</system:String>
+    <system:String x:Key="Lang.Nav.ActionCenter">Trung tâm Hành động / Action Center</system:String>
+    <system:String x:Key="Lang.Nav.Settings">Cài đặt / Settings</system:String>
+    <system:String x:Key="Lang.Nav.Upgrade">Nâng cấp Pro / Go Pro</system:String>
+    <system:String x:Key="Lang.Nav.GameMode">Game Booster / Tăng tốc Game</system:String>
+
+    <!-- Dashboard Header -->
+    <system:String x:Key="Lang.Dashboard.Status.Protected">Hệ thống an toàn / System Protected</system:String>
+    <system:String x:Key="Lang.Dashboard.Status.AtRisk">Hệ thống có rủi ro / System At Risk</system:String>
+    <system:String x:Key="Lang.Dashboard.ScanSmart">Quét thông minh / Smart Scan</system:String>
+
+    <!-- Generic Metrics -->
+    <system:String x:Key="Lang.Metric.CPU">Sử dụng CPU / CPU Usage</system:String>
+    <system:String x:Key="Lang.Metric.RAM">Sử dụng RAM / RAM Usage</system:String>
+    <system:String x:Key="Lang.Metric.Disk">Ổ đĩa trống / Free Space</system:String>
+    <system:String x:Key="Lang.Metric.Threats">Mối đe dọa / Threats</system:String>
+
+    <!-- Quick Actions -->
+    <system:String x:Key="Lang.Action.Quick">Hành động nhanh / Quick Actions</system:String>
+    <system:String x:Key="Lang.Action.DiskCleanup">Dọn dẹp Đĩa / Disk Cleanup</system:String>
+    <system:String x:Key="Lang.Action.DiskCleanup.Desc">Dọn file rác / Clean junk files</system:String>
+    <system:String x:Key="Lang.Action.Startup">Quản lý Khởi động / Startup Manager</system:String>
+    <system:String x:Key="Lang.Action.Startup.Desc">Quản lý ứng dụng / Manage apps</system:String>
+    <system:String x:Key="Lang.Action.Registry">Tinh chỉnh Registry / Registry Tweaks</system:String>
+    <system:String x:Key="Lang.Action.Registry.Desc">Sửa lỗi registry / Fix registry</system:String>
+    <system:String x:Key="Lang.Action.Windows">Tinh chỉnh Windows / Windows Tweaks</system:String>
+    <system:String x:Key="Lang.Action.Windows.Desc">Tùy chỉnh Windows / Custom Windows</system:String>
+
+    <!-- Advanced Tools -->
+    <system:String x:Key="Lang.Tools.Advanced">Công cụ Nâng cao / Advanced Tools</system:String>
+    <system:String x:Key="Lang.Tools.VirusScan">Quét Virus / Virus Scanner</system:String>
+    <system:String x:Key="Lang.Tools.VirusScan.Desc">Quét mã độc / Malware scan</system:String>
+    <system:String x:Key="Lang.Tools.RamBoost">Tăng tốc RAM / RAM Booster</system:String>
+    <system:String x:Key="Lang.Tools.RamBoost.Desc">Giải phóng RAM / Free memory</system:String>
+    <system:String x:Key="Lang.Tools.Monitor">Giám sát / System Monitor</system:String>
+    <system:String x:Key="Lang.Tools.Monitor.Desc">Xem chi tiết / View details</system:String>
+
+    <!-- File Recovery UI -->
+    <system:String x:Key="Lang.Recovery.Title">Phục hồi File / File Recovery</system:String>
+    <system:String x:Key="Lang.Recovery.SelectDrive">Chọn Ổ đĩa / Select Drive</system:String>
+    <system:String x:Key="Lang.Recovery.ScanBtn">QUÉT NGAY / SCAN NOW</system:String>
+    <system:String x:Key="Lang.Recovery.RecoverBtn">PHỤC HỒI / RECOVER</system:String>
+    <system:String x:Key="Lang.Recovery.Scanning">Đang quét... / Scanning...</system:String>
+    <system:String x:Key="Lang.Recovery.FoundFiles">File Tìm thấy / Found Files:</system:String>
+    <system:String x:Key="Lang.Recovery.Status">Tình trạng / Health</system:String>
+    <system:String x:Key="Lang.Recovery.Size">Kích thước / Size</system:String>
+    <system:String x:Key="Lang.Recovery.Date">Ngày xóa / Date Deleted</system:String>
+    <system:String x:Key="Lang.Recovery.Path">Đường dẫn gốc / Original Path</system:String>
+    <system:String x:Key="Lang.Recovery.Output">Thư mục xuất / Output Folder:</system:String>
+    <system:String x:Key="Lang.Recovery.Browse">Chọn / Browse...</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster">Tăng tốc Hệ thống / System Booster</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Desc">Tối ưu hóa hệ thống / Optimization</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.DisableSleep">Tắt chế độ Sleep / Disable Sleep</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.DisableHiber">Tắt Hibernation / Disable Hibernation</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.HighPerf">Bật High Performance / Enable High Perf</system:String>
+
+    <!-- System Booster UI -->
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Desktop">Màn hình &amp; Explorer / Desktop</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Network">Mạng &amp; DNS / Network</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Power">Năng lượng / Power</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Stability">Ổn định / Stability</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Advanced">Nâng cao / Advanced</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.Desktop">Tối ưu hóa Giao diện / Interface Optimization</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.DesktopDesc">Tăng tốc độ hệ thống / Improve responsiveness</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.NetworkDesc">Tối ưu kết nối mạng / Optimize connectivity</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.PowerDesc">Quản lý nguồn điện / Power management</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.StabilityDesc">Dọn dẹp hệ thống / Clean &amp; Stabilize</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Visuals.Title">Tối ưu Hiệu ứng / Visual Effects</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Visuals.Desc">Tắt hiệu ứng động / Disable animations</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Telemetry.Title">Chặn Theo dõi / Block Telemetry</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Telemetry.Desc">Chặn gửi dữ liệu / Stop sending data</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Net.Title">Tối ưu TCP/IP / Optimize TCP/IP</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Net.Desc">Tăng tốc mạng / Boost network speed</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Sleep.Title">Tắt Ngủ &amp; Chờ / Disable Sleep</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Sleep.Desc">Giữ máy luôn bật / Keep system on</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Hiber.Title">Tắt Ngủ đông / Off Hibernation</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Hiber.Desc">Giải phóng đĩa / Free disk space</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Power.Title">Hiệu năng Tối đa / Max Performance</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Power.Desc">Tăng tốc CPU / Boost CPU speed</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Temp.Title">Tệp Tạm / Temp Files</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Temp.Desc">Dọn dẹp rác / Clean junk</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.BtnOptimize">TỐI ƯU HÓA NGAY / OPTIMIZE NOW</system:String>
+
+    <!-- Panels -->
+    <system:String x:Key="Lang.Panel.Cleanup">Công cụ Dọn dẹp / Cleanup Tools</system:String>
+    <system:String x:Key="Lang.Panel.Optimize">Công cụ Tối ưu / Optimization Tools</system:String>
+    <system:String x:Key="Lang.Panel.System">Công cụ Hệ thống / System Tools</system:String>
+    <system:String x:Key="Lang.Panel.Privacy">Bảo vệ Riêng tư / Privacy Guardian</system:String>
+    <system:String x:Key="Lang.Panel.Benchmark">Đánh giá Hiệu năng / Performance Benchmark</system:String>
+    <system:String x:Key="Lang.Nav.Benchmark">Benchmark / Đánh giá</system:String>
+    
+    <!-- Footer Tooltips -->
+    <system:String x:Key="Lang.Footer.DiskCleanup">Dọn dẹp Đĩa / Disk Cleanup</system:String>
+    <system:String x:Key="Lang.Footer.Registry">Dọn Registry / Registry Cleaner</system:String>
+    <system:String x:Key="Lang.Footer.Startup">Q.Lý Khởi động / Startup Mgr</system:String>
+    <system:String x:Key="Lang.Footer.Privacy">Bảo mật / Privacy</system:String>
+    <system:String x:Key="Lang.Footer.Files">Tập tin / Files</system:String>
+    <system:String x:Key="Lang.Footer.System">Hệ thống / System</system:String>
+    <system:String x:Key="Lang.Footer.Search">Tìm kiếm / Search</system:String>
+    <system:String x:Key="Lang.Footer.Updates">Cập nhật / Updates</system:String>
+    <system:String x:Key="Lang.Footer.SmartScan">Quét thông minh AI / AI Smart Scan</system:String>
+
+    <!-- Additional Nav -->
+    <system:String x:Key="Lang.Nav.Privacy">Bảo mật / Privacy</system:String>
+    <system:String x:Key="Lang.Nav.Files">Tập tin / Files</system:String>
+
+    <!-- Status -->
+    <system:String x:Key="Lang.Status.Normal">● Bình thường / Normal</system:String>
+    <system:String x:Key="Lang.Status.Secure">● An toàn / Secure</system:String>
+    
+    <!-- Tools Descs -->
+    <system:String x:Key="Lang.Tools.MemoryOpt">Tối ưu Bộ nhớ / Memory Opt</system:String>
+    <system:String x:Key="Lang.Tools.MemoryOpt.Desc">Giải phóng RAM / Free RAM</system:String>
+    <system:String x:Key="Lang.Tools.SysInfo">Thông tin / System Info</system:String>
+    <system:String x:Key="Lang.Tools.SysInfo.Desc">Xem cấu hình / View specs</system:String>
+    <system:String x:Key="Lang.Tools.Registry.Desc2">Sửa lỗi Registry / Fix Registry</system:String>
+
+    <!-- Settings -->
+    <system:String x:Key="Lang.Settings.Title">Cài đặt / Settings</system:String>
+    <system:String x:Key="Lang.Settings.General">Chung / General</system:String>
+    <system:String x:Key="Lang.Settings.Language">Ngôn ngữ / Language</system:String>
+    <system:String x:Key="Lang.Settings.AutoStart">Khởi động cùng Windows / Auto-Start</system:String>
+    <system:String x:Key="Lang.Settings.MinimizeTray">Thu nhỏ xuống khay / Minimize to Tray</system:String>
+    <system:String x:Key="Lang.Settings.Security">Bảo mật / Security</system:String>
+    <system:String x:Key="Lang.Settings.RealTime">Bảo vệ thời gian thực / Real-Time Protection</system:String>
+    <system:String x:Key="Lang.Settings.RealTime.Desc">Tự động quét file / Auto scan files</system:String>
+    <system:String x:Key="Lang.Settings.Advanced">Nâng cao / Advanced</system:String>
+    <system:String x:Key="Lang.Settings.WinUpdate">Cập nhật Windows / Windows Update</system:String>
+    <system:String x:Key="Lang.Settings.WinUpdate.Desc">Bật/Tắt cập nhật / Enable/Disable Update</system:String>
+    <system:String x:Key="Lang.Settings.PrinterFix">Sửa lỗi máy in / Fix Printer</system:String>
+
+    <!-- Login Window -->
+    <system:String x:Key="Lang.Login.Title">ĐĂNG NHẬP / LOGIN</system:String>
+    <system:String x:Key="Lang.Login.Welcome">Chào mừng trở lại! / Welcome Back!</system:String>
+    <system:String x:Key="Lang.Login.Subtitle">Đăng nhập để tiếp tục / Sign in to continue</system:String>
+    <system:String x:Key="Lang.Login.Username">TÊN ĐĂNG NHẬP / USERNAME</system:String>
+    <system:String x:Key="Lang.Login.Password">MẬT KHẨU / PASSWORD</system:String>
+    <system:String x:Key="Lang.Login.Button">ĐĂNG NHẬP / LOGIN</system:String>
+    <system:String x:Key="Lang.Login.Forgot">Quên mật khẩu? / Forgot Password?</system:String>
+
+    <!-- Register Window -->
+    <system:String x:Key="Lang.Register.Tab">ĐĂNG KÝ / REGISTER</system:String>
+    <system:String x:Key="Lang.Register.Title">Tạo tài khoản / Create Account</system:String>
+    <system:String x:Key="Lang.Register.Subtitle">14 ngày dùng thử miễn phí / 14 days free trial</system:String>
+    <system:String x:Key="Lang.Register.Email">EMAIL</system:String>
+    <system:String x:Key="Lang.Register.Button">TẠO TÀI KHOẢN / CREATE ACCOUNT</system:String>
+    <system:String x:Key="Lang.Register.Benefits">🎁 Bạn sẽ nhận được / You'll get:</system:String>
+    <system:String x:Key="Lang.Register.Benefit1">14 ngày Free Trial</system:String>
+    <system:String x:Key="Lang.Register.Benefit2">Full Access</system:String>
+    <system:String x:Key="Lang.Register.Benefit3">Secure Encryption</system:String>
+
+    <!-- Branding & Features -->
+    <system:String x:Key="Lang.Brand.Slogan">Ultimate System Care</system:String>
+    <system:String x:Key="Lang.Brand.Copyright">© 2026 AVA Security. All rights reserved.</system:String>
+    <system:String x:Key="Lang.Feature.Boost">Tăng tốc 300% / Boost 300%</system:String>
+    <system:String x:Key="Lang.Feature.Malware">Chống Malware / No Malware</system:String>
+    <system:String x:Key="Lang.Feature.Clean">Dọn thông minh / Smart Clean</system:String>
+    <system:String x:Key="Lang.Feature.Support">Hỗ trợ 24/7 / 24/7 Support</system:String>
+    
+    <system:String x:Key="Lang.Nav.System">Hệ thống / System</system:String>
+    
+    <!-- Messages -->
+    <system:String x:Key="Lang.Msg.LoginSuccess">Đăng nhập thành công! Dashboard đã được mở khóa. / Login Successful! Dashboard unlocked.</system:String>
+    <system:String x:Key="Lang.Msg.StartScan">Bắt đầu quét nhanh... / Starting Quick Scan...</system:String>
+    <system:String x:Key="Lang.Msg.ScanComplete">Quét hoàn tất. / Scan complete.</system:String>
+    <system:String x:Key="Lang.Msg.Welcome">Chào mừng / Welcome</system:String>
+
+</ResourceDictionary>

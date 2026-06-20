@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Semantic Theme Brushes - DARK MODE / Cọ Chủ đề - CHẾ ĐỘ TỐI -->
+    
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="ThemeSurfaceBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="ThemeSidebarBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="ThemeContentBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="ThemeCardBrush" Color="#1E293B"/>
+    
+    <!-- Text -->
+    <SolidColorBrush x:Key="ThemeTextPrimaryBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="ThemeTextSecondaryBrush" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="ThemeTextMutedBrush" Color="#64748B"/>
+    <SolidColorBrush x:Key="ThemeTextReverseBrush" Color="#0F172A"/>
+    
+    <!-- Borders -->
+    <SolidColorBrush x:Key="ThemeBorderBrush" Color="#334155"/>
+    <SolidColorBrush x:Key="ThemeBorderLightBrush" Color="#1E293B"/>
+    
+    <!-- Gradients -->
+    <LinearGradientBrush x:Key="ThemeHeaderGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#1E293B" Offset="0"/>
+        <GradientStop Color="#0F172A" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Compatibility Overrides - Redirecting Light Brushes to Dark equivalents -->
+    <!-- Ghi đè Tương thích - Chuyển hướng các Brush Sáng sang giá trị Tối -->
+    
+    <!-- Background redirects -->
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="LightBgBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="#1E293B"/> <!-- CRITICAL: White background becomes Surface dark -->
+    <SolidColorBrush x:Key="CardBgBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="SidebarBgBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="ContentBgBrush" Color="#0F172A"/>
+    
+    <!-- Text redirects -->
+    <SolidColorBrush x:Key="TextBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#64748B"/>
+    
+    <!-- Border redirects -->
+    <SolidColorBrush x:Key="BorderBrush" Color="#334155"/>
+    <SolidColorBrush x:Key="BorderLightBrush" Color="#334155"/>
+    <SolidColorBrush x:Key="BorderDarkBrush" Color="#1E293B"/>
+    
+    <!-- Interaction redirects -->
+    <SolidColorBrush x:Key="SelectedItemBgBrush" Color="#083344"/>
+    <SolidColorBrush x:Key="HoverBgBrush" Color="#334155"/>
+    
+    <!-- Dashboard specific redirects -->
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="SurfaceDarkBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="CardDarkBrush" Color="#1E293B"/>
+
+    <!-- Gradients -->
+    <LinearGradientBrush x:Key="DashboardHeaderGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#1E293B" Offset="0"/>
+        <GradientStop Color="#0F172A" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!-- Override the one in App.xaml -->
+    <StaticResource x:Key="HeaderGradient" ResourceKey="DashboardHeaderGradient"/>
+
+</ResourceDictionary>

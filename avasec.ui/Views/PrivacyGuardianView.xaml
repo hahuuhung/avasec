@@ -1,0 +1,328 @@
+<UserControl x:Class="AVASec.UI.Views.PrivacyGuardianView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900"
+             Background="#0F172A">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <TextBlock Text="🛡️ Privacy Guardian" 
+                       FontSize="28" FontWeight="Bold" Foreground="White"/>
+            <TextBlock Text="Protect your privacy from trackers, ads, and telemetry / Bảo vệ quyền riêng tư" 
+                       FontSize="14" Foreground="#94A3B8" Margin="0,8,0,0"/>
+        </StackPanel>
+
+        <!-- Privacy Score Banner -->
+        <Border Grid.Row="1" CornerRadius="16" Margin="0,0,0,25">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4F46E5" Offset="0"/>
+                    <GradientStop Color="#7C3AED" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="30,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Privacy Score Circle -->
+                <Grid Grid.Column="0" Width="100" Height="100">
+                    <Ellipse Width="100" Height="100" Stroke="White" StrokeThickness="4" 
+                             Fill="Transparent" Opacity="0.3"/>
+                    <Ellipse x:Name="ScoreRing" Width="100" Height="100" 
+                             Stroke="White" StrokeThickness="4" Fill="Transparent"
+                             StrokeDashCap="Round" StrokeDashArray="0 100"
+                             RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <RotateTransform Angle="-90"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock x:Name="ScoreText" Text="--" FontSize="32" FontWeight="Bold" 
+                                   Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Text="%" FontSize="14" Foreground="White" Opacity="0.8"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Score Info -->
+                <StackPanel Grid.Column="1" Margin="30,0,0,0" VerticalAlignment="Center">
+                    <TextBlock x:Name="GradeText" Text="Not Scanned" FontSize="20" 
+                               FontWeight="SemiBold" Foreground="White"/>
+                    <TextBlock x:Name="StatusText" Text="Click 'Scan Privacy' to analyze your privacy settings" 
+                               FontSize="13" Foreground="White" Opacity="0.8" Margin="0,8,0,0"/>
+
+                    <!-- Quick Stats -->
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                        <Border Background="White" Opacity="0.15" CornerRadius="6" Padding="10,5" Margin="0,0,10,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🚫" FontSize="14"/>
+                                <TextBlock x:Name="BlockedCountText" Text="0" FontSize="14" 
+                                           Foreground="White" FontWeight="SemiBold" Margin="5,0,0,0"/>
+                                <TextBlock Text=" Blocked" FontSize="12" Foreground="White" Opacity="0.8"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="White" Opacity="0.15" CornerRadius="6" Padding="10,5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⚠️" FontSize="14"/>
+                                <TextBlock x:Name="IssuesCountText" Text="0" FontSize="14" 
+                                           Foreground="White" FontWeight="SemiBold" Margin="5,0,0,0"/>
+                                <TextBlock Text=" Issues" FontSize="12" Foreground="White" Opacity="0.8"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Action Button -->
+                <Button Grid.Column="2" x:Name="ScanBtn" Content="🔍 Scan Privacy"
+                        Background="White" Foreground="#4F46E5" FontWeight="SemiBold"
+                        Padding="20,12" FontSize="14" Cursor="Hand"
+                        Click="ScanPrivacy_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Main Content - Tabs -->
+        <TabControl Grid.Row="2" Background="Transparent" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="#94A3B8"/>
+                    <Setter Property="Padding" Value="20,10"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                        Padding="{TemplateBinding Padding}"
+                                        BorderThickness="0,0,0,3" BorderBrush="Transparent">
+                                    <ContentPresenter ContentSource="Header"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Foreground" Value="#6366F1"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter TargetName="border" Property="BorderBrush" Value="#6366F1"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <!-- Tracker Blocking Tab -->
+            <TabItem Header="🚫 Tracker Blocking">
+                <Border Background="#1E293B" CornerRadius="12" Margin="0,15,0,0" Padding="25">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                            <TextBlock Text="Ad &amp; Tracker Blocking" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Block known advertising and tracking domains via hosts file" 
+                                       FontSize="12" Foreground="#94A3B8" Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="TrackerList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#0F172A" CornerRadius="8" Padding="15,12" Margin="0,0,0,8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding}" FontSize="13" Foreground="#E2E8F0"/>
+                                                <TextBlock Grid.Column="1" Text="✓ Blocked" FontSize="11" 
+                                                           Foreground="#10B981"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                            <Button x:Name="EnableBlockingBtn" Content="🛡️ Enable Tracking Protection"
+                                    Style="{StaticResource PrimaryButtonStyle}" 
+                                    Padding="20,10" FontSize="13" Margin="0,0,10,0"
+                                    Click="EnableBlocking_Click"/>
+                            <Button x:Name="DisableBlockingBtn" Content="⚠️ Disable Protection"
+                                    Style="{StaticResource SecondaryButtonStyle}" 
+                                    Padding="15,10" FontSize="13"
+                                    Click="DisableBlocking_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <!-- Browser Issues Tab -->
+            <TabItem Header="🌐 Browser Security">
+                <Border Background="#1E293B" CornerRadius="12" Margin="0,15,0,0" Padding="25">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                            <TextBlock Text="Browser Extension Security" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Scan for risky browser extensions that may compromise privacy" 
+                                       FontSize="12" Foreground="#94A3B8" Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="BrowserIssuesList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#DC2626" Opacity="0.1"/>
+                                            </Border.Background>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Background="#DC2626" CornerRadius="4" Padding="8,4" 
+                                                        VerticalAlignment="Top" Margin="0,0,15,0">
+                                                    <TextBlock Text="{Binding Browser}" FontSize="11" 
+                                                               Foreground="White" FontWeight="SemiBold"/>
+                                                </Border>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{Binding Issue}" FontSize="13" 
+                                                               Foreground="#F87171" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding Recommendation}" FontSize="12" 
+                                                               Foreground="#94A3B8" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <!-- Empty State -->
+                        <TextBlock x:Name="NoBrowserIssuesText" Grid.Row="1" 
+                                   Text="✅ No browser security issues found"
+                                   FontSize="14" Foreground="#10B981" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Visibility="Collapsed"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <!-- Telemetry Tab -->
+            <TabItem Header="📡 Telemetry Control">
+                <Border Background="#1E293B" CornerRadius="12" Margin="0,15,0,0" Padding="25">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                            <TextBlock Text="Windows Telemetry Settings" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Control what data Windows sends to Microsoft" 
+                                       FontSize="12" Foreground="#94A3B8" Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="TelemetryList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#0F172A" CornerRadius="8" Padding="15" Margin="0,0,0,10">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" FontSize="14" 
+                                                               Foreground="White" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding RegistryPath}" FontSize="10" 
+                                                               Foreground="#64748B" Margin="0,5,0,0" 
+                                                               TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <Border Grid.Column="1" CornerRadius="4" Padding="10,5"
+                                                        VerticalAlignment="Center">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Background" Value="#10B981"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                                                    <Setter Property="Background" Value="#F59E0B"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <TextBlock FontSize="11" Foreground="White" FontWeight="SemiBold">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Text" Value="Disabled"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                                                        <Setter Property="Text" Value="Enabled"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <StackPanel Grid.Row="2" Margin="0,20,0,0">
+                            <Button x:Name="DisableTelemetryBtn" Content="🔒 Disable All Telemetry (Admin Required)"
+                                    Style="{StaticResource DangerButtonStyle}" 
+                                    Padding="20,12" FontSize="13" HorizontalAlignment="Left"
+                                    Click="DisableTelemetry_Click"/>
+                            <TextBlock Text="⚠️ Requires administrator privileges. Some features may be affected." 
+                                       FontSize="11" Foreground="#F59E0B" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </TabItem>
+        </TabControl>
+
+        <!-- Footer -->
+        <Border Grid.Row="3" Margin="0,15,0,0">
+            <TextBlock Text="💡 Tip: Enable tracking protection and disable telemetry for maximum privacy" 
+                       FontSize="12" Foreground="#64748B" HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>

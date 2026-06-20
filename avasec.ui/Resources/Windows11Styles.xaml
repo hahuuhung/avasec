@@ -1,0 +1,127 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================ -->
+    <!-- Windows 11 Fluent Design System Resources  -->
+    <!-- ============================================ -->
+
+    <!-- Corner Radius Standards -->
+    <CornerRadius x:Key="Win11CornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="Win11SmallCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="Win11LargeCornerRadius">16</CornerRadius>
+    <CornerRadius x:Key="Win11ButtonCornerRadius">6</CornerRadius>
+
+    <!-- Elevation Shadows (Depth) -->
+    <DropShadowEffect x:Key="Win11CardShadow" 
+                      Color="#000000" 
+                      BlurRadius="16" 
+                      ShadowDepth="8" 
+                      Opacity="0.25" 
+                      Direction="270"/>
+
+    <DropShadowEffect x:Key="Win11FloatingShadow" 
+                      Color="#000000" 
+                      BlurRadius="24" 
+                      ShadowDepth="12" 
+                      Opacity="0.3" 
+                      Direction="270"/>
+
+    <!-- Acrylic Background (Simulated - True acrylic requires CompositionAPI) -->
+    <SolidColorBrush x:Key="Win11AcrylicBackgroundBrush" Color="#E01E293B" Opacity="0.85"/>
+    <SolidColorBrush x:Key="Win11AcrylicOverlayBrush" Color="#CC0F172A" Opacity="0.9"/>
+
+    <!-- Mica Background (Simulated) -->
+    <SolidColorBrush x:Key="Win11MicaBackgroundBrush" Color="#F00F172A" Opacity="0.95"/>
+
+    <!-- Button Styles - Windows 11 -->
+    <Style x:Key="Win11ButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#334155"/>
+        <Setter Property="Foreground" Value="#E2E8F0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="16,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource Win11ButtonCornerRadius}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#475569"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#1E293B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Primary Button - Windows 11 Accent -->
+    <Style x:Key="Win11PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource Win11ButtonStyle}">
+        <Setter Property="Background" Value="#6366F1"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#4F46E5"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#4338CA"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Card Style - Windows 11 -->
+    <Style x:Key="Win11CardStyle" TargetType="Border">
+        <Setter Property="Background" Value="#1E293B"/>
+        <Setter Property="BorderBrush" Value="#334155"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{StaticResource Win11CornerRadius}"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Effect" Value="{StaticResource Win11CardShadow}"/>
+    </Style>
+
+    <!-- Tooltip Style - Windows 11 with Acrylic -->
+    <Style x:Key="Win11TooltipStyle" TargetType="ToolTip">
+        <Setter Property="Background" Value="{StaticResource Win11AcrylicOverlayBrush}"/>
+        <Setter Property="Foreground" Value="#E2E8F0"/>
+        <Setter Property="BorderBrush" Value="#475569"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource Win11SmallCornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ScrollBar Style - Windows 11 Minimal -->
+    <Style x:Key="Win11ScrollBarStyle" TargetType="ScrollBar">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+    <!-- Animation Durations -->
+    <Duration x:Key="Win11FastDuration">0:0:0.167</Duration>
+    <Duration x:Key="Win11NormalDuration">0:0:0.250</Duration>
+    <Duration x:Key="Win11SlowDuration">0:0:0.500</Duration>
+
+</ResourceDictionary>

@@ -1,0 +1,138 @@
+<Window x:Class="AVASec.UI.Views.RegistryTweaksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Registry Tweaks - AVA Security" 
+        Height="650" Width="900"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40" GlassFrameThickness="0" CornerRadius="12"/>
+    </WindowChrome.WindowChrome>
+    
+    <Window.Resources>
+        <!-- Toggle Switch Style (Checkbox) -->
+        <Style x:Key="ToggleSwitchStyle" TargetType="CheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Background="Transparent" Cursor="Hand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Border x:Name="Border" Width="40" Height="20" CornerRadius="10" Background="{StaticResource DarkBorderBrush}">
+                                <Ellipse x:Name="Dot" Width="16" Height="16" Fill="White" HorizontalAlignment="Left" Margin="2,0,0,0">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.3"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Border>
+                            
+                            <ContentPresenter Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource AccentTealBrush}"/>
+                                <Setter TargetName="Dot" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Dot" Property="Margin" Value="0,0,2,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{StaticResource MainBackgroundGradient}" CornerRadius="12" BorderBrush="{StaticResource BorderGlowBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>  <!-- Title Bar -->
+                <RowDefinition Height="Auto"/>  <!-- Header -->
+                <RowDefinition Height="*"/>     <!-- Tweaks List -->
+                <RowDefinition Height="Auto"/>  <!-- Footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Border Grid.Row="0" Background="{StaticResource DarkSurfaceBrush}" 
+                    CornerRadius="12,12,0,0" MouseLeftButtonDown="TitleBar_MouseDown" Height="40">
+                <Grid Margin="15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Click="Back_Click" Style="{StaticResource IconButtonStyle}" ToolTip="Back">
+                        <TextBlock Text="←" FontSize="18" Margin="0,-2,0,0"/>
+                    </Button>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="⚙️" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Registry Tweaks" Style="{StaticResource Heading2Style}" Margin="0" FontSize="16"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="👤" x:Name="UserButton" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="UserButton_Click" Foreground="White" ToolTip="Login / Đăng nhập" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="💬" x:Name="ChatToggleButton" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="ChatToggle_Click" Foreground="White" Margin="0,0,5,0" ToolTip="Support Chat (Dashboard) / Hỗ trợ Chat" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="⚙" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="Settings_Click" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="☰" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="Toolbox_Click" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="─" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="MinimizeButton_Click" Foreground="White" ToolTip="Minimize to Taskbar / Thu nhỏ xuống thanh tác vụ" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="➘" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="TrayButton_Click" Foreground="White" ToolTip="Hide / Ẩn" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="✕" Style="{StaticResource IconButtonStyle}" Width="36" Height="36" Click="CloseButton_Click" Foreground="White" ToolTip="Close / Đóng" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Header -->
+            <Border Grid.Row="1" Padding="25,20">
+                <StackPanel>
+                    <TextBlock Text="Tối ưu Windows Registry / Optimize Windows Registry" 
+                               Style="{StaticResource Heading2Style}" FontSize="18"/>
+                    <TextBlock Text="Tinh chỉnh các cài đặt ẩn của Windows để tăng hiệu suất và trải nghiệm người dùng.&#x0a;Tweaking hidden Windows settings to improve performance and user experience." 
+                               Style="{StaticResource CaptionStyle}" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Tweaks List -->
+            <ScrollViewer Grid.Row="2" Margin="20,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="TweaksContainer" Margin="0,0,0,20">
+                    <!-- Tweaks will be added here dynamically -->
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Footer -->
+            <Border Grid.Row="3" Background="{StaticResource DarkSurfaceBrush}" 
+                    Padding="20,15" CornerRadius="0,0,12,12" BorderBrush="{StaticResource DarkBorderBrush}" BorderThickness="0,1,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚠️" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock VerticalAlignment="Center">
+                            <Run Text="Cảnh báo: " FontWeight="Bold" Foreground="{StaticResource WarningBrush}"/>
+                            <Run Text="Một số tweak cần khởi động lại máy để áp dụng. / Some tweaks require restart to apply." 
+                                 Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="StatusText" 
+                                  Text="Sẵn sàng / Ready" 
+                                  Foreground="{StaticResource TextSecondaryBrush}"
+                                  FontSize="12"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,15,0"/>
+                        <Button Content="Close" Click="CloseButton_Click" Style="{StaticResource SecondaryButtonStyle}" Padding="15,6" Height="30" FontSize="12"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

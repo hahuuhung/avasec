@@ -1,0 +1,168 @@
+{
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-31T10:30:00Z",
+    "signatures": [
+        {
+            "name": "EICAR Test File",
+            "pattern": "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo=",
+            "severity": "Low",
+            "description": "EICAR standard antivirus test file - harmless test signature"
+        },
+        {
+            "name": "WannaCry Ransomware",
+            "pattern": "V2FubmFDcnkgUmFuc29td2FyZQ==",
+            "severity": "Critical",
+            "description": "WannaCry ransomware signature"
+        },
+        {
+            "name": "Trojan.Generic",
+            "pattern": "VHJvamFuLkdlbmVyaWM=",
+            "severity": "High",
+            "description": "Generic trojan detection pattern"
+        },
+        {
+            "name": "Keylogger.Win32",
+            "pattern": "R2V0QXN5bmNLZXlTdGF0ZQ==",
+            "severity": "High",
+            "description": "Windows keylogger using GetAsyncKeyState API"
+        },
+        {
+            "name": "Backdoor.Agent",
+            "pattern": "YmFja2Rvb3I=",
+            "severity": "Critical",
+            "description": "Backdoor agent pattern"
+        },
+        {
+            "name": "Spyware.Password",
+            "pattern": "cGFzc3dvcmQ=",
+            "severity": "Medium",
+            "description": "Password stealing spyware"
+        },
+        {
+            "name": "Adware.Generic",
+            "pattern": "YWR3YXJl",
+            "severity": "Low",
+            "description": "Generic adware pattern"
+        },
+        {
+            "name": "Worm.Autorun",
+            "pattern": "YXV0b3J1bi5pbmY=",
+            "severity": "Medium",
+            "description": "Autorun worm signature"
+        },
+        {
+            "name": "Rootkit.Hidden",
+            "pattern": "cm9vdGtpdA==",
+            "severity": "Critical",
+            "description": "Rootkit detection"
+        },
+        {
+            "name": "Miner.Bitcoin",
+            "pattern": "bWluZXI=",
+            "severity": "High",
+            "description": "Cryptocurrency miner"
+        },
+        {
+            "name": "Ransomware.Cryptolocker",
+            "pattern": "Y3J5cHRvbG9ja2Vy",
+            "severity": "Critical",
+            "description": "Cryptolocker ransomware variant"
+        },
+        {
+            "name": "Exploit.CVE",
+            "pattern": "ZXhwbG9pdA==",
+            "severity": "High",
+            "description": "Exploit code pattern"
+        },
+        {
+            "name": "Dropper.Downloader",
+            "pattern": "ZG93bmxvYWRlcg==",
+            "severity": "High",
+            "description": "Malware dropper/downloader"
+        },
+        {
+            "name": "Trojan.Emotet",
+            "pattern": "RW1vdGV0",
+            "severity": "Critical",
+            "description": "Emotet banking trojan"
+        },
+        {
+            "name": "RAT.RemoteAccess",
+            "pattern": "cmVtb3RlIGFjY2Vzcw==",
+            "severity": "Critical",
+            "description": "Remote Access Trojan"
+        },
+        {
+            "name": "Stealer.Credentials",
+            "pattern": "Y3JlZGVudGlhbHM=",
+            "severity": "High",
+            "description": "Credential stealing malware"
+        },
+        {
+            "name": "PowerShell.Suspicious",
+            "pattern": "SW52b2tlLVdlYlJlcXVlc3Q=",
+            "severity": "Medium",
+            "description": "Suspicious PowerShell web request"
+        },
+        {
+            "name": "Registry.Modifier",
+            "pattern": "UmVnRWRpdA==",
+            "severity": "Medium",
+            "description": "Registry modification attempt"
+        },
+        {
+            "name": "Packer.UPX",
+            "pattern": "VVBYIQ==",
+            "severity": "Medium",
+            "description": "UPX packed executable"
+        },
+        {
+            "name": "Macro.Malicious",
+            "pattern": "QXV0b09wZW4=",
+            "severity": "High",
+            "description": "Malicious Office macro"
+        }
+    ],
+    "malwareHashes": [
+        {
+            "hash": "44d88612fea8a8f36de82e1278abb02f",
+            "name": "Sample Malware",
+            "severity": "High"
+        },
+        {
+            "hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+            "name": "WannaCry Ransomware",
+            "severity": "Critical"
+        },
+        {
+            "hash": "ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa",
+            "name": "Emotet Trojan",
+            "severity": "Critical"
+        },
+        {
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "name": "EmptyFile Malware",
+            "severity": "Low"
+        },
+        {
+            "hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+            "name": "Password Hash",
+            "severity": "Medium"
+        },
+        {
+            "hash": "098f6bcd4621d373cade4e832627b4f6",
+            "name": "Test Malware Hash",
+            "severity": "Low"
+        },
+        {
+            "hash": "5d41402abc4b2a76b9719d911017c592",
+            "name": "Hello World Malware",
+            "severity": "Low"
+        },
+        {
+            "hash": "d8e8fca2dc0f896fd7cb4cb0031ba249",
+            "name": "Test Pattern",
+            "severity": "Medium"
+        }
+    ]
+}

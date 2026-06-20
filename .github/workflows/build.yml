@@ -1,0 +1,36 @@
+name: Build AVA Security (avasec)
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore avasec.sln
+
+      - name: Build
+        run: dotnet build avasec.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test avasec.sln --configuration Release --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish avasec.ui/avasec.ui.csproj -c Release -r win-x64 --self-contained false -o ./publish/AVASecurity
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVASecurity-win-x64
+          path: publish/AVASecurity/

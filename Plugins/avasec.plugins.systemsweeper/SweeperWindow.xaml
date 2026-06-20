@@ -1,0 +1,46 @@
+<Window x:Class="AVASec.Plugins.SystemSweeper.SweeperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="System Sweeper" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="#2D2D30" Foreground="White">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" BorderBrush="#555" BorderThickness="0,0,0,1" Padding="0,0,0,15" Margin="0,0,0,20">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="🧹" FontSize="24" Margin="0,0,15,0"/>
+                <StackPanel>
+                    <TextBlock Text="SYSTEM SWEEPER" FontSize="20" FontWeight="Bold" Foreground="#FFA500"/>
+                    <TextBlock Text="Disk Cleanup Utility" FontSize="12" Foreground="#AAA"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Checkboxes -->
+        <Border Grid.Row="1" Background="#3E3E42" CornerRadius="4" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Select items to clean:" FontWeight="Bold" Margin="0,0,0,10"/>
+                <CheckBox x:Name="CheckTemp" Content="Temporary Files (Temp)" IsChecked="True" Foreground="White" Margin="0,5"/>
+                <CheckBox x:Name="CheckPrefetch" Content="Windows Prefetch" IsChecked="True" Foreground="White" Margin="0,5"/>
+                <CheckBox x:Name="CheckRecycle" Content="Recycle Bin (Simulated)" IsChecked="False" Foreground="White" Margin="0,5"/>
+                <CheckBox x:Name="CheckBrowser" Content="Browser Cache (Chrome/Edge)" IsChecked="False" Foreground="White" Margin="0,5"/>
+                <CheckBox x:Name="CheckLogs" Content="System Logs" IsChecked="True" Foreground="White" Margin="0,5"/>
+                
+                <TextBlock x:Name="TotalSizeText" Text="Estimated Space: Calculation pending..." Foreground="#FFA500" Margin="0,20,0,0" FontStyle="Italic"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Footer -->
+        <Grid Grid.Row="2" Margin="0,15,0,0">
+            <ProgressBar x:Name="CleanProgress" Height="10" VerticalAlignment="Top" Background="#333" Foreground="#FFA500" Visibility="Hidden"/>
+            <Button x:Name="CleanBtn" Content="CLEAN NOW" Padding="30,12" HorizontalAlignment="Right" Background="#FFA500" Foreground="Black" FontWeight="Bold" BorderThickness="0" Click="Clean_Click" Margin="0,15,0,0"/>
+        </Grid>
+    </Grid>
+</Window>

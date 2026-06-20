@@ -1,0 +1,33 @@
+<UserControl x:Class="AVASec.Mini.Controls.SmokeEffect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="88" Background="Transparent" ClipToBounds="False">
+    <Canvas Width="400" Height="88" ClipToBounds="False">
+        <Ellipse x:Name="P1" Canvas.Left="168" Canvas.Top="62" Width="36" Height="22" Fill="#B0BEC5" Opacity="0"/>
+        <Ellipse x:Name="P2" Canvas.Left="142" Canvas.Top="68" Width="28" Height="18" Fill="#CFD8DC" Opacity="0"/>
+        <Ellipse x:Name="P3" Canvas.Left="198" Canvas.Top="70" Width="32" Height="20" Fill="#90A4AE" Opacity="0"/>
+        <Ellipse x:Name="P4" Canvas.Left="120" Canvas.Top="72" Width="24" Height="16" Fill="#ECEFF1" Opacity="0"/>
+        <Ellipse x:Name="P5" Canvas.Left="220" Canvas.Top="74" Width="26" Height="16" Fill="#B0BEC5" Opacity="0"/>
+        <Ellipse x:Name="P6" Canvas.Left="180" Canvas.Top="76" Width="20" Height="14" Fill="#FFFFFF" Opacity="0"/>
+    </Canvas>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard RepeatBehavior="Forever">
+                    <DoubleAnimation Storyboard.TargetName="P1" Storyboard.TargetProperty="(Canvas.Top)" From="62" To="0" Duration="0:0:3.8" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P1" Storyboard.TargetProperty="Opacity" From="0.55" To="0" Duration="0:0:3.8"/>
+                    <DoubleAnimation Storyboard.TargetName="P2" Storyboard.TargetProperty="(Canvas.Top)" From="68" To="4" Duration="0:0:4.4" BeginTime="0:0:0.6" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P2" Storyboard.TargetProperty="Opacity" From="0.45" To="0" Duration="0:0:4.4" BeginTime="0:0:0.6"/>
+                    <DoubleAnimation Storyboard.TargetName="P3" Storyboard.TargetProperty="(Canvas.Top)" From="70" To="2" Duration="0:0:4.0" BeginTime="0:0:1.2" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P3" Storyboard.TargetProperty="Opacity" From="0.5" To="0" Duration="0:0:4.0" BeginTime="0:0:1.2"/>
+                    <DoubleAnimation Storyboard.TargetName="P4" Storyboard.TargetProperty="(Canvas.Top)" From="72" To="6" Duration="0:0:3.5" BeginTime="0:0:0.3" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P4" Storyboard.TargetProperty="Opacity" From="0.4" To="0" Duration="0:0:3.5" BeginTime="0:0:0.3"/>
+                    <DoubleAnimation Storyboard.TargetName="P5" Storyboard.TargetProperty="(Canvas.Top)" From="74" To="8" Duration="0:0:4.6" BeginTime="0:0:1.8" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P5" Storyboard.TargetProperty="Opacity" From="0.42" To="0" Duration="0:0:4.6" BeginTime="0:0:1.8"/>
+                    <DoubleAnimation Storyboard.TargetName="P6" Storyboard.TargetProperty="(Canvas.Top)" From="76" To="10" Duration="0:0:3.2" BeginTime="0:0:2.2" AutoReverse="False"/>
+                    <DoubleAnimation Storyboard.TargetName="P6" Storyboard.TargetProperty="Opacity" From="0.35" To="0" Duration="0:0:3.2" BeginTime="0:0:2.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+</UserControl>

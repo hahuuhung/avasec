@@ -1,0 +1,781 @@
+<Window x:Class="AVASec.UI.Views.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AVASec.UI.Views"
+        mc:Ignorable="d"
+        Title="{DynamicResource Lang.App.Title}" 
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Icon="pack://application:,,,/Resources/app_icon.png">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40" ResizeBorderThickness="5" GlassFrameThickness="0" CornerRadius="8"/>
+    </WindowChrome.WindowChrome>
+
+    <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="12" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>  <!-- Header -->
+                <RowDefinition Height="*"/>   <!-- Content -->
+                <RowDefinition Height="50"/>  <!-- Footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Gradient Background for Header -->
+            <Border Grid.Row="0" Background="{DynamicResource HeaderGradient}"/>
+            <Border Grid.Row="2" Background="{DynamicResource SelectedItemBgBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0"/>
+
+            <!-- ========== HEADER ========== -->
+            <Border Grid.Row="0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Gradient Background for Header -->
+                    <Border Grid.ColumnSpan="2" Background="{DynamicResource HeaderGradient}"/>
+
+                    <!-- Logo & Title -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+                        <!-- Logo Image -->
+                        <Image Source="pack://application:,,,/Resources/app_icon.png" Width="32" Height="32" Margin="0,0,12,0"/>
+                        <TextBlock x:Name="BrandTitleText" Text="AVA Security" FontSize="24" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock Text="Pro" FontSize="14" Margin="10,4,0,0" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Header Controls & Notifications -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,10,0">
+                         <!-- GO PREMIUM BUTTON -->
+                        <Button x:Name="HeaderGoPremiumBtn" Content="GO PREMIUM" 
+                                Background="#10B981" Foreground="White" FontWeight="Bold" FontSize="12"
+                                Padding="16,6" Margin="0,0,16,0" BorderThickness="0"
+                                Click="ToolbarUpdates_Click"
+                                WindowChrome.IsHitTestVisibleInChrome="True">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="4"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <!-- NOTIFICATION BELL -->
+                        <Grid Margin="0,0,16,0" VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonUp="Bell_Click">
+                            <TextBlock Text="🔔" FontSize="20" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            <Border x:Name="NotificationBadge" Background="#EF4444" CornerRadius="8" MinWidth="16" Height="16" 
+                                    VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-4,-4,0" Visibility="Collapsed">
+                                <TextBlock x:Name="NotificationCount" Text="0" Foreground="White" FontSize="10" FontWeight="Bold" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,0"/>
+                            </Border>
+
+                            <!-- NOTIFICATION POPUP -->
+                            <Popup x:Name="NotificationPopup" StaysOpen="False" Placement="Bottom" VerticalOffset="10" HorizontalOffset="-280">
+                                <Border Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="8" Width="320" MaxHeight="400">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Popup Header -->
+                                        <Border Grid.Row="0" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="12">
+                                            <TextBlock Text="Notifications" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                        </Border>
+
+                                        <!-- Notification List -->
+                                        <ListView x:Name="NotificationList" Grid.Row="1" Background="Transparent" BorderThickness="0" MaxHeight="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Padding="8" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Cursor="Hand" MouseLeftButtonUp="NotificationItem_Click">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Text="{Binding Icon}" FontSize="16" VerticalAlignment="Top" Margin="0,2,8,0"/>
+                                                            <StackPanel Grid.Column="1">
+                                                                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                                                                <TextBlock Text="{Binding Message}" FontSize="11" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                        
+                                        <!-- Empty State -->
+                                        <TextBlock x:Name="NoNotificationsText" Grid.Row="1" Text="No new notifications" 
+                                                   Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20" Visibility="Collapsed"/>
+
+                                        <!-- Popup Footer -->
+                                        <Border Grid.Row="2" Padding="8" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+                                            <Button Content="Mark all as read" Style="{DynamicResource LinkButtonStyle}" FontSize="11" HorizontalAlignment="Center" Click="MarkAllRead_Click"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        
+                        <!-- Window Controls -->
+                        <Button Content="👤" x:Name="UserButton" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True" Click="UserButton_Click" ToolTip="Login / Đăng nhập"/>
+                        <Button Content="💬" x:Name="ChatToggleButton" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="ChatToggle_Click" Foreground="White" Margin="0,0,5,0" ToolTip="Support Chat / Hỗ trợ Chat" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="☰" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="Toolbox_Click" Foreground="White" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="─" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="MinimizeButton_Click" Foreground="White" ToolTip="Minimize to Taskbar / Thu nhỏ xuống thanh tác vụ" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="➘" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="TrayButton_Click" Foreground="White" ToolTip="Hide to Tray / Ẩn xuống khay hệ thống" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button Content="✕" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="CloseButton_Click" Foreground="White" ToolTip="Exit / Thoát ứng dụng" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ========== MAIN CONTENT ========== -->
+            <Grid x:Name="MainLayoutGrid" Grid.Row="1" SizeChanged="MainLayoutGrid_SizeChanged">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="SidebarColumn" Width="220"/>  <!-- Sidebar -->
+                    <ColumnDefinition Width="*"/>    <!-- Content -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Sidebar Navigation -->
+                <Border Grid.Column="0" Background="{DynamicResource SidebarBgBrush}" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Navigation Items -->
+                        <StackPanel Grid.Row="0" Margin="0,10,0,0">
+                            <RadioButton x:Name="NavOverview" IsChecked="True" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="Overview">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📊" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Overview}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavOneClick" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="OneClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚡" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.OneClick}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavCleanUp" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="CleanUp">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🧹" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.CleanRepair}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavOptimize" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="Optimize">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🚀" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Optimization}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavGameMode" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="GameMode">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🎮" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.GameMode}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavBenchmark" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="Benchmark">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📊" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Benchmark}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavPrivacy" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="Privacy">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🔒" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Protection}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavFiles" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="Files">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📁" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Files}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton x:Name="NavSystem" Style="{DynamicResource TabButtonStyle}" Checked="NavItem_Checked" Tag="System">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🛠️" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.System}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <!-- Separator -->
+                            <Border Height="1" Background="{DynamicResource BorderLightBrush}" Margin="10,12,10,12"/>
+                            
+                            <!-- Settings Link (Bottom) -->
+                            <RadioButton x:Name="NavSettings" Style="{DynamicResource TabButtonStyle}" Click="Settings_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚙" FontSize="18" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{DynamicResource Lang.Nav.Settings}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
+
+                        <!-- Version & License -->
+                        <StackPanel Grid.Row="1" Margin="16,0,16,16">
+                            <TextBlock Text="v1.0.0" Foreground="Gray" FontSize="12" Margin="0,0,0,6"/>
+                            
+                            <!-- License Info -->
+                            <TextBlock x:Name="LicenseStatusText" Text="Free Trial" Foreground="{DynamicResource AccentBlueBrush}" FontWeight="SemiBold" FontSize="12"/>
+                            <TextBlock x:Name="OfflineModeText" Text="🛡️ Offline-first" Foreground="#10B981" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap" ToolTip="100% on your PC — no cloud required / Hoạt động trên máy bạn"/>
+                            <TextBlock x:Name="LicenseExpiryText" Text="Expires: Unknown" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,0,0,10"/>
+                            
+                            <Button x:Name="UpgradeButton" Content="{DynamicResource Lang.Nav.Upgrade}" Style="{DynamicResource OrangeButtonStyle}" HorizontalAlignment="Left" Click="ToolbarUpdates_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Main Content Area -->
+                <Border Grid.Column="1" Background="{DynamicResource ContentBgBrush}" Padding="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Category Title -->
+                        <TextBlock x:Name="CategoryTitle" Grid.Row="0" Text="{DynamicResource Lang.Nav.Overview}" FontSize="22" FontWeight="SemiBold" 
+                                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,20"/>
+
+                        <!-- Content Panel (Changes based on navigation) -->
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <Grid x:Name="ContentPanel">
+                                <!-- Default: Overview Content -->
+                                <StackPanel x:Name="OverviewPanel">
+                                    <!-- Metric Cards Row / Hàng Thẻ Chỉ số -->
+                                    <StackPanel x:Name="OverviewStatsPanel">
+                                        <UniformGrid Columns="4" Margin="0,0,0,24">
+                                        <!-- CPU Usage Card / Thẻ Sử dụng CPU -->
+                                        <Border Style="{DynamicResource MetricCardStyle}" Margin="0,0,8,0">
+                                            <StackPanel>
+                                                <TextBlock Text="💻" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Metric.CPU}" FontSize="13" FontWeight="Medium" 
+                                                          Foreground="{DynamicResource TextSecondaryBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="CpuText" Text="0%" FontSize="32" FontWeight="Bold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,8,0,12"/>
+                                                <!-- Progress Bar -->
+                                                <Border Height="6" Background="#334155" 
+                                                       CornerRadius="3" Margin="0,0,0,12">
+                                                    <Border x:Name="CpuProgressBorder" Width="0" HorizontalAlignment="Left" 
+                                                           Background="{DynamicResource CyanBrush}" 
+                                                           CornerRadius="3"/>
+                                                </Border>
+                                                <TextBlock x:Name="CpuStatusText" Text="{DynamicResource Lang.Status.Normal}" FontSize="11" 
+                                                          Foreground="{DynamicResource GreenBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- RAM Usage Card / Thẻ Sử dụng RAM -->
+                                        <Border Style="{DynamicResource MetricCardStyle}" Margin="8,0">
+                                            <StackPanel>
+                                                <TextBlock Text="🗃️" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Metric.RAM}" FontSize="13" FontWeight="Medium" 
+                                                          Foreground="{DynamicResource TextSecondaryBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="RamText" Text="0%" FontSize="32" FontWeight="Bold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                                <TextBlock x:Name="RamDetailText" Text="Used 0GB of 0GB" FontSize="10" 
+                                                          Foreground="#94A3B8" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <!--Progress Bar -->
+                                                <Border Height="6" Background="{DynamicResource BorderLightBrush}" 
+                                                       CornerRadius="3" Margin="0,0,0,12">
+                                                    <Border x:Name="RamProgressBorder" Width="0" HorizontalAlignment="Left" 
+                                                           Background="{DynamicResource CyanBrush}" 
+                                                           CornerRadius="3"/>
+                                                </Border>
+                                                <TextBlock x:Name="RamStatusText" Text="{DynamicResource Lang.Status.Normal}" FontSize="11" 
+                                                          Foreground="{DynamicResource GreenBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- Disk Space Card / Thẻ Dung lượng Đĩa -->
+                                        <Border Style="{DynamicResource MetricCardStyle}" Margin="8,0">
+                                            <StackPanel>
+                                                <TextBlock Text="💾" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Metric.Disk}" FontSize="13" FontWeight="Medium" 
+                                                          Foreground="{DynamicResource TextSecondaryBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="DiskText" Text="0%" FontSize="32" FontWeight="Bold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                                <TextBlock x:Name="DiskDetailText" Text="Free 0GB of 0GB" FontSize="10" 
+                                                          Foreground="#94A3B8" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <!-- Progress Bar -->
+                                                <Border Height="6" Background="{DynamicResource BorderLightBrush}" 
+                                                       CornerRadius="3" Margin="0,0,0,12">
+                                                    <Border x:Name="DiskProgressBorder" Width="0" HorizontalAlignment="Left" 
+                                                           Background="{DynamicResource CyanBrush}" 
+                                                           CornerRadius="3"/>
+                                                </Border>
+                                                <TextBlock x:Name="DiskStatusText" Text="{DynamicResource Lang.Status.Normal}" FontSize="11" 
+                                                          Foreground="{DynamicResource GreenBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- Threats Card / Thẻ Mối đe dọa -->
+                                        <Border Style="{DynamicResource MetricCardStyle}" Margin="8,0,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="🛡️" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Metric.Threats}" FontSize="13" FontWeight="Medium" 
+                                                          Foreground="{DynamicResource TextSecondaryBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="ThreatsText" Text="0" FontSize="32" FontWeight="Bold" 
+                                                          Foreground="{DynamicResource GreenBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,8,0,20"/>
+                                                <!-- Progress Bar (empty for 0 threats) -->
+                                                <Border Height="6" Background="#334155" 
+                                                       CornerRadius="3" Margin="0,0,0,12">
+                                                    <Border x:Name="ThreatsProgressBorder" Width="0" HorizontalAlignment="Left" 
+                                                           Background="{DynamicResource ErrorBrush}" 
+                                                           CornerRadius="3"/>
+                                                </Border>
+                                                <TextBlock x:Name="ThreatsStatusText" Text="{DynamicResource Lang.Status.Secure}" FontSize="11" 
+                                                          Foreground="{DynamicResource GreenBrush}" 
+                                                          HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </UniformGrid>
+                                    </StackPanel>
+
+                                    <!-- One-Click Status Panel (RAM & Monitor) -->
+                                    <StackPanel x:Name="OneClickStatusPanel" Visibility="Collapsed" Margin="0,0,0,20">
+                                        <WrapPanel>
+                                             <!-- Smart RAM Card (Moved) -->
+                                            <Border Style="{DynamicResource FeatureCardStyle}" Width="220" Margin="0,0,16,0" MouseLeftButtonUp="RamBooster_Click">
+                                                <StackPanel>
+                                                    <TextBlock Text="⚡" FontSize="32" Margin="0,0,0,10"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.RamBoost}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.RamBoost.Desc}" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- System Monitor Card (Moved) -->
+                                            <Border Style="{DynamicResource StatCardStyle}" Width="220" Margin="0,0,16,0" MouseLeftButtonUp="SystemMonitor_Click" Cursor="Hand">
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.Monitor}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                                                    <Grid Margin="0,0,0,8">
+                                                        <TextBlock Text="CPU" FontSize="12" Foreground="#94A3B8"/>
+                                                        <TextBlock x:Name="OneClickCpuText" Text="0%" HorizontalAlignment="Right" FontSize="12" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    </Grid>
+                                                    <ProgressBar x:Name="OneClickCpuProgressBar" Value="0" Height="6" Background="{DynamicResource BorderBrush}" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <Grid Margin="0,10,0,8">
+                                                        <TextBlock Text="RAM" FontSize="12" Foreground="#94A3B8"/>
+                                                        <TextBlock x:Name="OneClickRamText" Text="0%" HorizontalAlignment="Right" FontSize="12" Foreground="{DynamicResource GreenBrush}"/>
+                                                    </Grid>
+                                                    <ProgressBar x:Name="OneClickRamProgressBar" Value="0" Height="6" Background="{DynamicResource BorderBrush}" Foreground="{DynamicResource GreenBrush}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+                                    </StackPanel>
+
+                                    <!-- Quick Actions / Hành động Nhanh -->
+                                    <StackPanel x:Name="QuickActionsPanel">
+                                        <TextBlock Text="{DynamicResource Lang.Action.Quick}" FontSize="16" FontWeight="SemiBold" 
+                                              Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <UniformGrid Columns="4" Rows="1">
+                                        <!-- Disk Cleanup Card / Thẻ Dọn dẹp Đĩa -->
+                                        <Border x:Name="DiskCleanupCard" Style="{DynamicResource FeatureCardStyle}" Margin="0,0,8,0" Padding="24">
+                                            <StackPanel>
+                                                <!-- Icon with Circle Background -->
+                                                <Border Width="64" Height="64" Background="{DynamicResource SelectedItemBgBrush}" 
+                                                       CornerRadius="32" Margin="0,0,0,16">
+                                                    <TextBlock Text="🧹" FontSize="32" 
+                                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="{DynamicResource Lang.Action.DiskCleanup}" FontSize="14" FontWeight="SemiBold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Action.DiskCleanup.Desc}" 
+                                                          FontSize="11" LineHeight="16"
+                                                          Foreground="#94A3B8" 
+                                                          TextAlignment="Center" TextWrapping="Wrap" 
+                                                          Margin="0,0,0,16" Height="32"/>
+                                                <Button Content="{DynamicResource Lang.Dashboard.ScanSmart}" 
+                                                       Style="{DynamicResource PrimaryButtonStyle}" 
+                                                       Click="DiskCleanup_Click"
+                                                       Padding="16,8" FontSize="12"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- Startup Manager Card / Thẻ Quản lý Khởi động -->
+                                        <Border x:Name="StartupManagerCard" Style="{DynamicResource FeatureCardStyle}" Margin="8,0,8,0" Padding="24">
+                                            <StackPanel>
+                                                <Border Width="64" Height="64" Background="{DynamicResource SelectedItemBgBrush}" 
+                                                       CornerRadius="32" Margin="0,0,0,16">
+                                                    <TextBlock Text="🚀" FontSize="32" 
+                                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Startup}" FontSize="14" FontWeight="SemiBold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Startup.Desc}" 
+                                                          FontSize="11" LineHeight="16"
+                                                          Foreground="#94A3B8" 
+                                                          TextAlignment="Center" TextWrapping="Wrap" 
+                                                          Margin="0,0,0,16" Height="32"/>
+                                                <Button Content="Manage" 
+                                                       Style="{DynamicResource PrimaryButtonStyle}" 
+                                                       Click="StartupManager_Click"
+                                                       Padding="16,8" FontSize="12"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- Registry Tweaks Card / Thẻ Tinh chỉnh Registry -->
+                                        <Border x:Name="RegistryTweaksCard" Style="{DynamicResource FeatureCardStyle}" Margin="8,0,8,0" Padding="24">
+                                            <StackPanel>
+                                                <Border Width="64" Height="64" Background="{DynamicResource SelectedItemBgBrush}" 
+                                                       CornerRadius="32" Margin="0,0,0,16">
+                                                    <TextBlock Text="🔧" FontSize="32" 
+                                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Registry}" FontSize="14" FontWeight="SemiBold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Registry.Desc}" 
+                                                          FontSize="11" LineHeight="16"
+                                                          Foreground="#94A3B8" 
+                                                          TextAlignment="Center" TextWrapping="Wrap" 
+                                                          Margin="0,0,0,16" Height="32"/>
+                                                <Button Content="Repair" 
+                                                       Style="{DynamicResource PrimaryButtonStyle}" 
+                                                       Click="RegistryTweaks_Click"
+                                                       Padding="16,8" FontSize="12"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <!-- Windows Tweaks Card / Thẻ Tinh chỉnh Windows -->
+                                        <Border x:Name="WindowsTweaksCard" Style="{DynamicResource FeatureCardStyle}" Margin="8,0,0,0" Padding="24">
+                                            <StackPanel>
+                                                <Border Width="64" Height="64" Background="{DynamicResource SelectedItemBgBrush}" 
+                                                       CornerRadius="32" Margin="0,0,0,16">
+                                                    <TextBlock Text="⚙️" FontSize="32" 
+                                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Windows}" FontSize="14" FontWeight="SemiBold" 
+                                                          Foreground="{DynamicResource TextPrimaryBrush}" 
+                                                          HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="{DynamicResource Lang.Action.Windows.Desc}" 
+                                                          FontSize="11" LineHeight="16"
+                                                          Foreground="#94A3B8" 
+                                                          TextAlignment="Center" TextWrapping="Wrap" 
+                                                          Margin="0,0,0,16" Height="32"/>
+                                                <Button Content="Customize" 
+                                                       Style="{DynamicResource PrimaryButtonStyle}" 
+                                                       Click="Windows11Tweaks_Click"
+                                                       Padding="16,8" FontSize="12"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </UniformGrid>
+                                    </StackPanel>
+
+                                    <!-- Advanced Tools Expander -->
+                                    <StackPanel x:Name="AdvancedToolsPanelContainer">
+                                        <Expander x:Name="AdvancedToolsExpander" Header="{DynamicResource Lang.Tools.Advanced}" Margin="0,20,0,0" IsExpanded="False" Foreground="{DynamicResource TextPrimaryBrush}">
+                                        <Expander.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </Expander.HeaderTemplate>
+                                        <Border Background="{DynamicResource SurfaceDarkBrush}" CornerRadius="4" Padding="16" Margin="0,10,0,0" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                                            <WrapPanel>
+                                                <!-- System Booster -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="SystemBooster_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🚀" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="{DynamicResource Lang.Tools.SystemBooster}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="{DynamicResource Lang.Tools.SystemBooster.Desc}" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <!-- Virus Scanner -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="VirusScanner_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🛡️" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Malware Fighter" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Remove malware &amp; threats" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- RAM Booster -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="RamBooster_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="⚡" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Smart RAM" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Optimize memory usage" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Uninstaller -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="Uninstaller_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🗑️" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Uninstaller" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Remove unwanted apps" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Driver Update -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="DriverUpdate_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🔄" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Driver Manager" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Update outdated drivers" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Software Update -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="SoftwareUpdate_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="⬆️" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Software Updater" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Keep apps up-to-date" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Smart Defrag -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="SmartDefrag_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="💿" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Smart Defrag" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Optimize hard drive" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Internet Booster -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="InternetBooster_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🌐" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Internet Booster" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Speed up connection" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Disk Doctor -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="DiskDoctor_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🩺" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Disk Doctor" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Fix disk errors" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- File Shredder -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="FileShredder_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="📄" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="File Shredder" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Securely delete files" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Undelete -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="Undelete_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="♻️" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="{DynamicResource Lang.Recovery.Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Recover lost files &amp; Unformat" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Large Files -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="LargeFile_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🐘" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Large Files Finder" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Find space hogs" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Empty Folder -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="EmptyFolder_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="📂" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Empty Folder Scanner" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Remove empty directories" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Shortcut Fixer -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="ShortcutFixer_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="🔗" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Shortcut Fixer" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Fix broken shortcuts" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Process Manager -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="ProcessManager_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="📊" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Process Manager" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Monitor running apps" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Auto Shutdown -->
+                                                <Border Style="{DynamicResource FeatureCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="AutoShutdown_Click">
+                                                    <StackPanel>
+                                                        <TextBlock Text="⏱️" FontSize="32" Margin="0,0,0,10"/>
+                                                        <TextBlock Text="Auto Shutdown" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="Schedule power tasks" FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- System Monitor -->
+                                                <Border Style="{DynamicResource StatCardStyle}" Width="200" Margin="0,0,16,16" MouseLeftButtonUp="SystemMonitor_Click" Cursor="Hand">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{DynamicResource Lang.Tools.Monitor}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                                                        <Grid Margin="0,0,0,8">
+                                                            <TextBlock Text="CPU" FontSize="12" Foreground="#94A3B8"/>
+                                                            <TextBlock x:Name="LegacyCpuText" Text="12%" HorizontalAlignment="Right" FontSize="12" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                        </Grid>
+                                                        <ProgressBar x:Name="CpuProgressBar" Value="12" Height="6" Background="{DynamicResource BorderBrush}" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                        <Grid Margin="0,10,0,8">
+                                                            <TextBlock Text="RAM" FontSize="12" Foreground="#94A3B8"/>
+                                                            <TextBlock x:Name="LegacyRamText" Text="45%" HorizontalAlignment="Right" FontSize="12" Foreground="{DynamicResource GreenBrush}"/>
+                                                        </Grid>
+                                                        <ProgressBar x:Name="RamProgressBar" Value="45" Height="6" Background="{DynamicResource BorderBrush}" Foreground="{DynamicResource GreenBrush}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </WrapPanel>
+                                        </Border>
+                                    </Expander>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Other panels will be shown/hidden based on navigation -->
+                            <StackPanel x:Name="CleanUpPanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.Cleanup}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <WrapPanel>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="DiskCleanup_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="🧹" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.DiskCleanup}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.DiskCleanup.Desc}" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="RegistryTweaks_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="📋" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.Registry}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.Registry.Desc2}" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="OptimizePanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.Optimize}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <WrapPanel>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="StartupManager_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="🚀" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.Startup}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="Improve Windows startup speed" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="RamBooster_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="💾" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.MemoryOpt}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.MemoryOpt.Desc}" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="SystemPanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.System}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <WrapPanel>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="Windows11Tweaks_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="⚙️" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.Windows}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Action.Windows.Desc}" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{DynamicResource ToolCardStyle}" Width="280" Margin="0,0,16,12" MouseLeftButtonUp="SystemInfo_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="ℹ️" FontSize="28" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                                                <StackPanel>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.SysInfo}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                                    <TextBlock Text="{DynamicResource Lang.Tools.SysInfo.Desc}" FontSize="12" Foreground="#94A3B8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="GameModePanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.GameMode}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <local:GameModeView />
+                                </StackPanel>
+
+                                <StackPanel x:Name="PrivacyPanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.Privacy}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <local:PrivacyGuardianView />
+                                </StackPanel>
+
+                                <StackPanel x:Name="BenchmarkPanel" Visibility="Collapsed">
+                                    <TextBlock Text="{DynamicResource Lang.Panel.Benchmark}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                                    <local:BenchmarkView />
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- ========== FOOTER / Quick Toolbar ========== -->
+            <Border Grid.Row="2" Background="{DynamicResource SelectedItemBgBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="🛡️" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.SmartScan}" Width="44" Height="44" Click="SmartScan_Click" Foreground="{DynamicResource AccentBlueBrush}"/>
+                    <Button Content="🧹" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.DiskCleanup}" Width="44" Height="44" Click="ToolbarDiskCleanup_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="📋" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Registry}" Width="44" Height="44" Click="ToolbarRegistry_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="🚀" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Startup}" Width="44" Height="44" Click="ToolbarStartup_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="🔒" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Privacy}" Width="44" Height="44" Click="ToolbarPrivacy_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="📁" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Files}" Width="44" Height="44" Click="ToolbarFiles_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="⚙️" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.System}" Width="44" Height="44" Click="ToolbarSystem_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="🔍" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Search}" Width="44" Height="44" Click="ToolbarSearch_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <Button Content="⬆️" Style="{DynamicResource IconButtonStyle}" ToolTip="{DynamicResource Lang.Footer.Updates}" Width="44" Height="44" Click="ToolbarUpdates_Click" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Login Overlay (Topmost) -->
+            <local:LoginOverlay x:Name="LoginScreen" Grid.RowSpan="3" Panel.ZIndex="2000" Visibility="Collapsed"/>
+
+
+        </Grid>
+    </Border>
+
+    <!-- Chat Widget Container (Hidden by default) -->
+    <Window.Tag>
+        <ContentControl x:Name="ChatWidgetContainer" Visibility="Collapsed"/>
+    </Window.Tag>
+</Window>

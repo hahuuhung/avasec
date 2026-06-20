@@ -1,0 +1,78 @@
+<Window x:Class="AVASec.Plugins.RegistryDoctor.DoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Registry Doctor" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E" Foreground="White">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" BorderBrush="#333" BorderThickness="0,0,0,1" Padding="0,0,0,15" Margin="0,0,0,20">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="💉" FontSize="24" Margin="0,0,15,0"/>
+                <StackPanel>
+                    <TextBlock Text="REGISTRY DOCTOR" FontSize="20" FontWeight="Bold" Foreground="#4DB8FF"/>
+                    <TextBlock Text="System Registry Analysis &amp; Repair" FontSize="12" Foreground="#888"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Controls -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Button x:Name="ScanBtn" Content="START SCAN" Padding="20,10" Background="#007ACC" Foreground="White" BorderThickness="0" FontWeight="Bold" Click="Scan_Click" HorizontalAlignment="Left"/>
+            <ProgressBar x:Name="ScanProgress" Height="4" VerticalAlignment="Bottom" Margin="0,5,0,-5" Background="#333" Foreground="#007ACC" Visibility="Hidden"/>
+        </Grid>
+
+        <!-- List -->
+        <DataGrid x:Name="IssuesGrid" Grid.Row="2" Background="#252526" BorderBrush="#333" HeadersVisibility="Column" 
+                  AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#333">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Section" Binding="{Binding Section}" Width="150"/>
+                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="300"/>
+                <DataGridTextColumn Header="Error" Binding="{Binding Error}" Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#333"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                    <Setter Property="BorderBrush" Value="#444"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridCell">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#007ACC"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+
+        <!-- Footer -->
+        <Grid Grid.Row="3" Margin="0,15,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="StatusText" Text="Ready to scan." VerticalAlignment="Center" Foreground="#888" Margin="0,0,15,0"/>
+                <Button x:Name="FixBtn" Content="FIX SELECTED" Padding="20,10" Background="#28A745" Foreground="White" BorderThickness="0" FontWeight="Bold" IsEnabled="False" Click="Fix_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

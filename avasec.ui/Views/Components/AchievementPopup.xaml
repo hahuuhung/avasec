@@ -1,0 +1,76 @@
+<Window x:Class="AVASec.UI.Views.Components.AchievementPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Achievement Unlocked" Height="100" Width="350"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowInTaskbar="False" Focusable="False"
+        Opacity="0">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Colors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border Background="{StaticResource BackgroundDarkBrush}" CornerRadius="12" 
+            BorderBrush="{StaticResource AccentGoldBrush}" BorderThickness="1.5"
+            Margin="5">
+        <Border.Effect>
+            <DropShadowEffect Color="#FFD700" BlurRadius="15" ShadowDepth="0" Opacity="0.4"/>
+        </Border.Effect>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Trophy Icon Area -->
+            <Grid Grid.Column="0" Background="Transparent">
+                <TextBlock Text="🏆" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Foreground="{StaticResource AccentGoldBrush}"/>
+            </Grid>
+
+            <!-- Text Content -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0">
+                <TextBlock Text="ACHIEVEMENT UNLOCKED" FontSize="10" FontWeight="Bold" 
+                           Foreground="{StaticResource AccentGoldBrush}"/>
+                
+                <TextBlock x:Name="TitleText" Text="First Victory" FontSize="16" FontWeight="Bold" 
+                           Foreground="White" Margin="0,2,0,0"/>
+                
+                <TextBlock x:Name="DescText" Text="You completed your first scan!" FontSize="12" 
+                           Foreground="{StaticResource TextSecondaryBrush}" TextTrimming="CharacterEllipsis"/>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                    <Border Background="{StaticResource AccentGoldBrush}" CornerRadius="4" Padding="6,2">
+                        <TextBlock x:Name="PointsText" Text="+500 XP" FontSize="10" FontWeight="Bold" Foreground="Black"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Confetti Placeholder (Simple dots) -->
+            <Canvas IsHitTestVisible="False" ClipToBounds="True">
+                <Ellipse Fill="{StaticResource CyanBrush}" Width="4" Height="4" Canvas.Left="10" Canvas.Top="10" Opacity="0.8"/>
+                <Ellipse Fill="{StaticResource AccentGoldBrush}" Width="6" Height="6" Canvas.Left="300" Canvas.Top="80" Opacity="0.8"/>
+            </Canvas>
+        </Grid>
+    </Border>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <!-- Fade In -->
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
+                    <!-- Move Up/Slide In (Managed via code-behind Top property typically, but Opacity is simpler for MVP) -->
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

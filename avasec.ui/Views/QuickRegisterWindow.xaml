@@ -1,0 +1,78 @@
+<Window x:Class="AVASec.UI.Views.QuickRegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quick Register - AVA Security" 
+        Height="300" Width="450"
+        Background="#1E1B4B"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/app_icon.png">
+    <Grid Margin="30">
+        <StackPanel>
+            <TextBlock Text="🚀 Tài khoản Test nhanh / Quick Test Account" 
+                      Foreground="White" 
+                      FontSize="24" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,20"/>
+
+            <TextBlock Text="Tạo một tài khoản test để kiểm tra đăng nhập" 
+                      Foreground="#CBD5E1" 
+                      FontSize="14"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,10"/>
+            
+            <TextBlock Text="Create a test account for login testing" 
+                      Foreground="#CBD5E1" 
+                      FontSize="13"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,30"/>
+
+            <Border Background="#312E81" 
+                    CornerRadius="8" 
+                    Padding="20"
+                    Margin="0,0,0,30">
+                <StackPanel>
+                    <TextBlock Foreground="White" FontSize="13">
+                        <Run Text="Username: " FontWeight="SemiBold"/>
+                        <Run Text="admin"/>
+                    </TextBlock>
+                    <TextBlock Foreground="White" FontSize="13" Margin="0,5,0,0">
+                        <Run Text="Password: " FontWeight="SemiBold"/>
+                        <Run Text="admin123"/>
+                    </TextBlock>
+                    <TextBlock Foreground="White" FontSize="13" Margin="0,5,0,0">
+                        <Run Text="Email: " FontWeight="SemiBold"/>
+                        <Run Text="admin@avasec.app"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="✅ Tạo tài khoản / Create Account" 
+                       Grid.Column="0"
+                       Click="CreateTestAccount_Click"
+                       Style="{StaticResource ModernButton}"
+                       Height="45"
+                       FontSize="14"/>
+
+                <Button Content="❌ Cancel / Hủy" 
+                       Grid.Column="2"
+                       Click="Cancel_Click"
+                       Height="45"
+                       FontSize="14">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
+                            <Setter Property="Background" Value="#6B7280"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

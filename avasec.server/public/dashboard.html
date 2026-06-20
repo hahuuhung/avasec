@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVA Security Master Control</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- SVGs for Icons -->
+    <!-- SVGs for Icons -->
+</head>
+
+<body>
+    <div class="container-fluid fade-in">
+        <div class="row">
+            <!-- Mobile Sidebar Overlay -->
+            <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
+            <!-- Mobile Header -->
+            <div class="mobile-header d-md-none">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="width: 32px; height: 32px; background: var(--primary-gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-shield-check text-white" style="font-size: 18px;"></i>
+                    </div>
+                    <h1 style="font-size: 18px; font-weight: 700; color: white; margin: 0;">AVA Security</h1>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 sidebar">
+                <div class="logo-section"
+                    style="text-align: left; margin-bottom: 40px; display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="width: 32px; height: 32px; background: var(--primary-gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-shield-check text-white" style="font-size: 20px;"></i>
+                    </div>
+                    <h1 style="font-size: 20px; font-weight: 700; color: white; margin: 0;">AVA Security</h1>
+                </div>
+
+                <div class="user-info"
+                    style="border: none; padding: 0; margin-bottom: 32px; text-align: left; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="user-avatar-small" style="width: 40px; height: 40px; margin: 0;">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div>
+                            <h3 id="displayUsername"
+                                style="font-size: 14px; font-weight: 600; margin: 0; color: white;">
+                                Loading...</h3>
+                            <div style="display: flex; flex-direction: column;">
+                                <span style="color: #94A3B8; font-size: 11px;">Đã kết nối / Connected</span>
+                                <span id="sidebarPlan"
+                                    style="color: #34D399; font-size: 11px; font-weight: 600;">Checking...</span>
+                                <span id="sidebarExpiry" style="color: #94A3B8; font-size: 11px;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="position-sticky pt-3" style="flex: 1;">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link active d-flex align-items-center">
+                                <i class="bi bi-speedometer2 nav-icon"></i>
+                                Tổng quan / Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link d-flex align-items-center">
+                                <i class="bi bi-shield-check nav-icon"></i>
+                                Quét bảo mật / Security Scan
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link d-flex align-items-center">
+                                <i class="bi bi-lightning-charge nav-icon"></i>
+                                Tối ưu hóa / Optimization
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="/donate.html" class="nav-link d-flex align-items-center">
+                                <i class="bi bi-gem nav-icon"></i>
+                                Nâng cấp gói / Upgrade Plan
+                            </a>
+                        </li>
+                        <hr class="my-3" style="background: rgba(255,255,255,0.1);">
+                        <li class="nav-item mb-2">
+                            <a href="/admin.html?secret=dev-secret" class="nav-link d-flex align-items-center" id="adminLink"
+                                style="display: none; color: #F472B6;">
+                                <i class="bi bi-people nav-icon"></i>
+                                Quản lý người dùng &amp; Key
+                            </a>
+                        </li>
+                    </ul>
+
+                    <button onclick="logout()"
+                        class="logout-btn mt-4 w-100 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-box-arrow-right nav-icon" style="margin: 0 8px 0 0;"></i>
+                        Đăng xuất / Sign Out
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <header
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-secondary">
+                    <div>
+                        <h2 class="h2">Tổng quan hệ thống / System Overview</h2>
+                        <p class="text-secondary">Giám sát thời gian thực & phát hiện mối đe dọa / Real-time supervision
+                        </p>
+                    </div>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <div
+                                style="padding: 8px 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 30px; color: #34D399; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                <span
+                                    style="width: 8px; height: 8px; background: #34D399; border-radius: 50%; box-shadow: 0 0 10px #34D399;"></span>
+                                Đã bảo vệ / Protected
+                            </div>
+                            <div class="position-relative ms-3" style="cursor: pointer;"
+                                onclick="toggleNotificationPanel(event)">
+                                <i id="notificationBellIcon" class="bi bi-bell-fill"
+                                    style="font-size: 20px; color: #94A3B8; transition: opacity 0.3s, color 0.3s;"></i>
+                                <span id="notificationBadge"
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    style="font-size: 10px; display: none;">
+                                    0
+                                </span>
+                            </div>
+
+                            <!-- Notification Dropdown/Panel -->
+                            <div id="notificationPanel" class="notification-panel">
+                                <div class="notification-header">
+                                    <span>Thông Báo</span>
+                                    <span style="font-size: 11px; color: #64748B; cursor: pointer;"
+                                        onclick="markAllAsRead()">Đánh dấu tất cả đã đọc</span>
+                                </div>
+                                <div id="notificationList" class="notification-list">
+                                    <div class="notification-empty">
+                                        <i class="bi bi-bell"></i>
+                                        <span>No new notifications</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Stats Grid -->
+                <div class="row mb-4">
+                    <!-- CPU Card -->
+                    <div class="col-md-4 mb-3">
+                        <div class="glass-panel h-100">
+                            <div class="stat-icon-bg" style="background: rgba(99, 102, 241, 0.1);">
+                                <i class="bi bi-cpu hero-icon" style="color: #6366F1;"></i>
+                            </div>
+                            <div class="stat-title">Tải CPU / CPU Load</div>
+                            <div class="stat-value" style="color: #818CF8" id="cpuResult">0%</div>
+                            <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">Hiệu suất tối ưu / Optimal
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RAM Card -->
+                    <div class="col-md-4 mb-3">
+                        <div class="glass-panel h-100">
+                            <div class="stat-icon-bg" style="background: rgba(16, 185, 129, 0.1);">
+                                <i class="bi bi-memory hero-icon" style="color: #34D399;"></i>
+                            </div>
+                            <div class="stat-title">Bộ nhớ RAM / Memory</div>
+                            <div class="stat-value" style="color: #34D399" id="ramResult">0%</div>
+                            <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">RAM Hệ thống / System RAM
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Threats Card -->
+                    <div class="col-md-4 mb-3">
+                        <div class="glass-panel h-100" id="threatCard">
+                            <div class="stat-icon-bg" id="threatIconBg" style="background: rgba(16, 185, 129, 0.1);">
+                                <i class="bi bi-shield-check hero-icon" id="threatIcon" style="color: #10B981;"></i>
+                            </div>
+                            <div class="stat-title">Mối đe dọa / Threats</div>
+                            <div class="stat-value" style="color: #10B981" id="threatResult">0</div>
+                            <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;" id="threatStatus">Hệ thống
+                                sạch / System clean</div>
+
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Grid for Modules -->
+                    <div class="row">
+                        <!-- Activity Feed -->
+                        <div class="col-lg-8 margin-bottom-mobile">
+                            <div class="glass-panel h-100" style="padding: 24px; border-radius: 16px;">
+                                <h3
+                                    style="color: white; margin-bottom: 20px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="bi bi-activity" style="font-size: 20px;"></i>
+                                    Hoạt động gần đây / Recent Activity
+                                </h3>
+                                <div style="display: flex; flex-direction: column; gap: 0;">
+                                    <div
+                                        style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: start; gap: 16px;">
+                                        <div
+                                            style="width: 8px; height: 8px; background: #34D399; border-radius: 50%; margin-top: 6px;">
+                                        </div>
+                                        <div>
+                                            <p style="color: #F1F5F9; font-weight: 500; font-size: 14px;">Real-time
+                                                protection
+                                                enabled</p>
+                                            <p style="color: #64748B; font-size: 12px; margin-top: 2px;">Core system
+                                                services
+                                                secured</p>
+                                        </div>
+                                        <span style="margin-left: auto; color: #64748B; font-size: 12px;">Just
+                                            now</span>
+                                    </div>
+                                    <div
+                                        style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: start; gap: 16px;">
+                                        <div
+                                            style="width: 8px; height: 8px; background: #60A5FA; border-radius: 50%; margin-top: 6px;">
+                                        </div>
+                                        <div>
+                                            <p style="color: #F1F5F9; font-weight: 500; font-size: 14px;">Smart Scan
+                                                Completed</p>
+                                            <p style="color: #64748B; font-size: 12px; margin-top: 2px;">Scanned 45,201
+                                                files in 3
+                                                mins</p>
+                                        </div>
+                                        <span style="margin-left: auto; color: #64748B; font-size: 12px;">2h ago</span>
+                                    </div>
+                                    <div style="padding: 16px 0; display: flex; align-items: start; gap: 16px;">
+                                        <div
+                                            style="width: 8px; height: 8px; background: #A78BFA; border-radius: 50%; margin-top: 6px;">
+                                        </div>
+                                        <div>
+                                            <p style="color: #F1F5F9; font-weight: 500; font-size: 14px;">Database
+                                                Update
+                                            </p>
+                                            <p style="color: #64748B; font-size: 12px; margin-top: 2px;">Definitions
+                                                version
+                                                2026.02.07</p>
+                                        </div>
+                                        <span style="margin-left: auto; color: #64748B; font-size: 12px;">5h ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="col-lg-4">
+                            <div class="glass-panel h-100" style="padding: 24px; border-radius: 16px;">
+                                <h3 style="color: white; margin-bottom: 20px; font-size: 18px;">Thao tác nhanh / Quick
+                                    Actions</h3>
+                                <div style="display: grid; gap: 12px;">
+                                    <button class="btn btn-secondary w-100 text-start"
+                                        style="background: rgba(255,255,255,0.05); border: none; color: #E2E8F0;">
+                                        <i class="bi bi-rocket-takeoff"></i> Tăng tốc / Boost
+                                    </button>
+                                    <button class="btn btn-secondary w-100 text-start"
+                                        style="background: rgba(255,255,255,0.05); border: none; color: #E2E8F0;">
+                                        <i class="bi bi-trash3"></i> Dọn dẹp / Cleanup
+                                    </button>
+                                    <button class="btn btn-secondary w-100 text-start"
+                                        style="background: rgba(255,255,255,0.05); border: none; color: #E2E8F0;">
+                                        <i class="bi bi-shield-check"></i> Quyền riêng tư / Privacy
+                                    </button>
+                                </div>
+
+                                <div
+                                    style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <p style="color: #94A3B8; font-size: 12px; margin-bottom: 8px;">Gói VIP /
+                                        VIP Status</p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <span id="dashboardPlan"
+                                                style="color: white; font-weight: 600; display: block;">Checking...</span>
+                                            <span id="dashboardExpiry" style="color: #94A3B8; font-size: 11px;"></span>
+                                        </div>
+                                        <a href="/donate.html" id="upgradeLink"
+                                            style="color: #6366F1; font-size: 12px; text-decoration: none;">Nâng cấp /
+                                            Upgrade →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Promotional Modal -->
+    <div class="modal fade" id="promoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-panel" style="border: 1px solid rgba(99, 102, 241, 0.3);">
+                <div class="modal-body p-0">
+                    <div id="promoImageContainer"
+                        style="width: 100%; height: 200px; background-size: cover; background-position: center; border-radius: 16px 16px 0 0; display: none;">
+                    </div>
+                    <div class="p-4">
+                        <h4 id="promoTitle" style="color: white; font-weight: 700; margin-bottom: 10px;">Special Offer!
+                        </h4>
+                        <p id="promoMessage" style="color: #CBD5E1; font-size: 14px; margin-bottom: 20px;"></p>
+                        <div class="d-grid gap-2">
+                            <a id="promoActionBtn" href="#" class="btn btn-primary"
+                                style="background: var(--primary-gradient); border: none;">Get Started</a>
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script src="notification.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userStr = localStorage.getItem('avasec_user');
+            if (!userStr) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            const user = JSON.parse(userStr);
+            document.getElementById('displayUsername').textContent = user.username;
+
+            if (user.username && user.username.toLowerCase() === 'admin') {
+                const adminLink = document.getElementById('adminLink');
+                if (adminLink) adminLink.style.display = 'flex';
+            }
+
+            // Fetch License Info
+            fetchLicenseInfo(user.userId);
+        });
+
+        async function fetchLicenseInfo(userId) {
+            try {
+                const response = await fetch(`/api/auth/user/${userId}`);
+                const data = await response.json();
+
+                if (data.success && data.data.License) {
+                    const license = data.data.License;
+                    const planElem = document.getElementById('dashboardPlan');
+                    const sidebarPlan = document.getElementById('sidebarPlan');
+                    const sidebarExpiry = document.getElementById('sidebarExpiry');
+                    const expiryElem = document.getElementById('dashboardExpiry');
+                    const upgradeLink = document.getElementById('upgradeLink');
+
+                    if (planElem) planElem.textContent = license.LicenseType + " Plan";
+                    if (sidebarPlan) {
+                        sidebarPlan.textContent = "VIP: " + license.LicenseType;
+                        if (license.LicenseType === 'Premium') sidebarPlan.style.color = '#F472B6';
+                    }
+
+                    if (license.ExpiryDate) {
+                        const date = new Date(license.ExpiryDate);
+                        const dateStr = `Exp: ${date.toLocaleDateString()}`;
+                        if (expiryElem) expiryElem.textContent = dateStr;
+                        if (sidebarExpiry) sidebarExpiry.textContent = dateStr;
+                    }
+
+                    if (license.LicenseType === 'Premium') {
+                        if (planElem) planElem.style.color = '#F472B6';
+                        if (upgradeLink) {
+                            upgradeLink.textContent = "Manage";
+                            upgradeLink.style.color = "#34D399";
+                        }
+                    }
+                } else {
+                    const planElem = document.getElementById('dashboardPlan');
+                    const sidebarPlan = document.getElementById('sidebarPlan');
+                    if (planElem) planElem.textContent = "Free Plan";
+                    if (sidebarPlan) sidebarPlan.textContent = "VIP: Free";
+                }
+            } catch (error) {
+                console.error('Error fetching license:', error);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('avasec_user');
+            window.location.href = '/index.html';
+        }
+
+        // Real-time Stats Polling
+        function fetchRealTimeStats() {
+            // In a real app, get deviceId from user profile or selection
+            // For demo, we use 'DATIT' as the active device
+            const deviceId = 'DATIT';
+
+            fetch(`/api/StatusReporting/${deviceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        const stats = data.data;
+
+                        // Update CPU
+                        const cpuVal = document.getElementById('cpuResult');
+                        if (cpuVal) cpuVal.textContent = Math.round(stats.cpuUsage) + '%';
+
+                        // Update RAM
+                        const ramVal = document.getElementById('ramResult');
+                        if (ramVal) ramVal.textContent = Math.round(stats.memoryUsage) + '%';
+
+                        // Update Threats
+                        const threatVal = document.getElementById('threatResult');
+                        const threatIcon = document.getElementById('threatIcon');
+                        const threatIconBg = document.getElementById('threatIconBg');
+                        const threatStatus = document.getElementById('threatStatus');
+
+                        if (threatVal) {
+                            threatVal.textContent = stats.threatsCount;
+
+                            if (stats.threatsCount > 0) {
+                                // Danger / Warning state - Yellow
+                                threatVal.style.color = '#FBBF24';
+                                if (threatIcon) {
+                                    threatIcon.className = 'bi bi-shield-exclamation hero-icon';
+                                    threatIcon.style.color = '#FBBF24';
+                                }
+                                if (threatIconBg) threatIconBg.style.background = 'rgba(251, 191, 36, 0.1)';
+                                if (threatStatus) {
+                                    threatStatus.textContent = "Phát hiện mối đe dọa! / Threats Detected!";
+                                    threatStatus.style.color = "#FBBF24";
+                                }
+                            } else {
+                                // Safe state - Green
+                                threatVal.style.color = '#10B981';
+                                if (threatIcon) {
+                                    threatIcon.className = 'bi bi-shield-check hero-icon';
+                                    threatIcon.style.color = '#10B981';
+                                }
+                                if (threatIconBg) threatIconBg.style.background = 'rgba(16, 185, 129, 0.1)';
+                                if (threatStatus) {
+                                    threatStatus.textContent = "Hệ thống sạch / System clean";
+                                    threatStatus.style.color = "#94A3B8";
+                                }
+                            }
+                        }
+                    }
+                })
+                .catch(err => console.error('Error fetching stats:', err));
+        }
+
+        // Notification Logic is now in notification.js
+        // Additional specific logic for dashboard: Promotional Modal
+
+        function checkForPromo(notifications) {
+            // Find first unread promotional notification
+            const promo = notifications.find(n => n.IsPromotional && !n.IsRead);
+            if (promo) {
+                // Check if we already showed this promo in this session
+                const shownPromos = JSON.parse(sessionStorage.getItem('shownPromos') || '[]');
+                if (shownPromos.includes(promo.NotificationId)) return;
+
+                // Show Promo Modal
+                document.getElementById('promoTitle').textContent = promo.Title;
+                document.getElementById('promoMessage').textContent = promo.Message;
+
+                const imgContainer = document.getElementById('promoImageContainer');
+                if (promo.ImageUrl) {
+                    imgContainer.style.backgroundImage = `url('${promo.ImageUrl}')`;
+                    imgContainer.style.display = 'block';
+                } else {
+                    imgContainer.style.display = 'none';
+                }
+
+                const actionBtn = document.getElementById('promoActionBtn');
+                if (promo.ActionUrl) {
+                    actionBtn.href = promo.ActionUrl;
+                    actionBtn.style.display = 'block';
+                } else {
+                    actionBtn.style.display = 'none';
+                }
+
+                const promoModal = new bootstrap.Modal(document.getElementById('promoModal'));
+                promoModal.show();
+
+                // Mark as shown
+                shownPromos.push(promo.NotificationId);
+                sessionStorage.setItem('shownPromos', JSON.stringify(shownPromos));
+
+                // Mark as read in DB (optional, or wait for user to click)
+                fetch(`/api/notifications/${promo.NotificationId}/read`, { method: 'PUT' });
+            }
+        }
+
+        // Poll for notifications
+        setInterval(fetchNotifications, 10000); // Every 10 seconds
+        fetchNotifications(); // Initial fetch
+
+        // Poll every 2 seconds for real-time stats
+        setInterval(fetchRealTimeStats, 2000);
+        // Initial fetch
+        fetchRealTimeStats();
+    </script>
+    <!-- Web Chat Widget -->
+    <script src="chat-widget.js"></script>
+</body>
+
+</html>

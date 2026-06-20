@@ -1,0 +1,143 @@
+<Window x:Class="AVASec.UI.Views.QuarantineWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AVASec.UI.Views"
+        mc:Ignorable="d"
+        Title="Quarantine Manager / Quản lý Cách ly" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2E"
+        Foreground="White"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        BorderBrush="#3E3E4E"
+        BorderThickness="1">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Colors.xaml"/>
+                <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#3E3E4E"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#4E4E5E"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#252535"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RowBackground" Value="#252535"/>
+            <Setter Property="AlternatingRowBackground" Value="#2A2A3A"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+        </Style>
+        
+         <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#333344"/>
+            <Setter Property="Foreground" Value="#AAAAAA"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3E3E5E"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ResourceDictionary>
+</Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Quarantine Manager / Quản lý Cách ly" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="Manage threats that have been isolated / Quản lý các mối đe dọa đã bị cô lập" FontSize="12" Foreground="#AAAAAA" Margin="0,5,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Button Content="👤" x:Name="UserButton" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="UserButton_Click" Foreground="White" ToolTip="Login / Đăng nhập"/>
+                    <Button Content="💬" x:Name="ChatToggleButton" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="ChatToggle_Click" Foreground="White" Margin="0,0,5,0" ToolTip="Support Chat (Dashboard) / Hỗ trợ Chat"/>
+                    <Button Content="⚙" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="Settings_Click" Foreground="White"/>
+                    <Button Content="☰" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="Toolbox_Click" Foreground="White"/>
+                    <Button Content="─" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="MinimizeButton_Click" Foreground="White" ToolTip="Minimize to Taskbar / Thu nhỏ xuống thanh tác vụ"/>
+                    <Button Content="➘" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="TrayButton_Click" Foreground="White" ToolTip="Hide / Ẩn"/>
+                    <Button Content="✕" Style="{DynamicResource IconButtonStyle}" Width="36" Height="36" Click="CloseButton_Click" Foreground="White" ToolTip="Close / Đóng"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Background="#252535" CornerRadius="8" Padding="1" ClipToBounds="True">
+            <DataGrid x:Name="QuarantineGrid" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Threat / Mối đe dọa" Binding="{Binding ThreatName}" Width="150"/>
+                    <DataGridTextColumn Header="Date / Ngày" Binding="{Binding QuarantinedAt, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" Width="140"/>
+                    <DataGridTextColumn Header="File Path / Đường dẫn" Binding="{Binding FilePath}" Width="*"/>
+                    <DataGridTextColumn Header="Size / Kích thước" Binding="{Binding FileSize}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        
+        <TextBlock x:Name="EmptyText" Grid.Row="1" Text="No quarantined files / Không có file cách ly" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Foreground="#666666" FontSize="16" Visibility="Collapsed"/>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Restore Selected / Khôi phục" Click="RestoreButton_Click" Background="#4CAF50" Margin="0,0,10,0"/>
+            <Button Content="Delete Selected / Xóa" Click="DeleteButton_Click" Background="#F44336" Margin="0,0,10,0"/>
+            <Button Content="Export Report / Xuất PDF" Click="ExportButton_Click" Background="#2196F3" Margin="0,0,10,0"/>
+            <Button Content="Clear All / Xóa tất cả" Click="ClearAllButton_Click" Background="#D32F2F" Margin="0,0,10,0"/>
+            <Button Content="Close / Đóng" Click="CloseButton_Click" Background="#3E3E4E"/>
+        </StackPanel>
+    </Grid>
+</Window>

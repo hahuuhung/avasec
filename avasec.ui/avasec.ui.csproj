@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\avasec.core\avasec.core.csproj" />
+    <ProjectReference Include="..\avasec.database\avasec.database.csproj" />
+    <ProjectReference Include="..\avasec.authentication\avasec.authentication.csproj" />
+    <ProjectReference Include="..\avasec.optimization\avasec.optimization.csproj" />
+    <ProjectReference Include="..\avasec.antivirus\avasec.antivirus.csproj" />
+    <ProjectReference Include="..\avasec.chat.core\avasec.chat.core.csproj" />
+    <ProjectReference Include="..\avasec.plugin.core\avasec.plugin.core.csproj" />
+    <ProjectReference Include="..\plugins\avasec.plugins.gamebooster\avasec.plugins.gamebooster.csproj" />
+    <ProjectReference Include="..\plugins\avasec.plugins.networkfortress\avasec.plugins.networkfortress.csproj" />
+    <ProjectReference Include="..\plugins\avasec.plugins.privacyshredder\avasec.plugins.privacyshredder.csproj" />
+    <ProjectReference Include="..\plugins\avasec.plugins.registrydoctor\avasec.plugins.registrydoctor.csproj" />
+    <ProjectReference Include="..\plugins\avasec.plugins.systemsweeper\avasec.plugins.systemsweeper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyName>AVASecurity</AssemblyName>
+    <RootNamespace>AVASec.UI</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\app_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+  <Target Name="CopyPlugins" AfterTargets="Build">
+    <ItemGroup>
+      <PluginFiles Include="$(TargetDir)avasec.plugins.*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(TargetDir)Plugins" />
+  </Target>
+
+</Project>

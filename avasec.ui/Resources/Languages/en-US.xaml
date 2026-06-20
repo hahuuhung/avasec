@@ -1,0 +1,224 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- General -->
+    <system:String x:Key="Lang.App.Title">AVASecurity Pro - System Utilities</system:String>
+    <system:String x:Key="Lang.Common.Close">Close</system:String>
+    <system:String x:Key="Lang.Common.Cancel">Cancel</system:String>
+    <system:String x:Key="Lang.Common.Save">Save</system:String>
+    <system:String x:Key="Lang.Common.Refresh">Refresh</system:String>
+    
+    <!-- Navigation -->
+    <system:String x:Key="Lang.Nav.Overview">Overview</system:String>
+    <system:String x:Key="Lang.Nav.OneClick">1-Click Maintenance</system:String>
+    <system:String x:Key="Lang.Nav.CleanRepair">Clean Up &amp; Repair</system:String>
+    <system:String x:Key="Lang.Nav.Optimization">Speed Up &amp; Optimize</system:String>
+    <system:String x:Key="Lang.Nav.Protection">Protection &amp; Privacy</system:String>
+    <system:String x:Key="Lang.Nav.Toolbox">Toolbox</system:String>
+    <system:String x:Key="Lang.Nav.ActionCenter">Action Center</system:String>
+    <system:String x:Key="Lang.Nav.Settings">Settings</system:String>
+    <system:String x:Key="Lang.Nav.System">System</system:String>
+    <system:String x:Key="Lang.Chat.Send">Send</system:String>
+    <system:String x:Key="Lang.Nav.Upgrade">Go Pro</system:String>
+    <system:String x:Key="Lang.Nav.GameMode">Graphics Booster</system:String>
+
+    <!-- Dashboard Header -->
+    <system:String x:Key="Lang.Dashboard.Status.Protected">Your System is Protected</system:String>
+    <system:String x:Key="Lang.Dashboard.Status.AtRisk">System At Risk</system:String>
+    <system:String x:Key="Lang.Dashboard.ScanSmart">Smart Scan</system:String>
+
+    <!-- Generic Metrics -->
+    <system:String x:Key="Lang.Metric.CPU">CPU Usage</system:String>
+    <system:String x:Key="Lang.Metric.RAM">RAM Usage</system:String>
+    <system:String x:Key="Lang.Metric.Disk">Free Space</system:String>
+    <system:String x:Key="Lang.Metric.Threats">Threats</system:String>
+
+    <!-- Quick Actions -->
+    <system:String x:Key="Lang.Action.Quick">Quick Actions</system:String>
+    <system:String x:Key="Lang.Action.DiskCleanup">Disk Cleanup</system:String>
+    <system:String x:Key="Lang.Action.DiskCleanup.Desc">Clean junk &amp; temp files</system:String>
+    <system:String x:Key="Lang.Action.Startup">Startup Manager</system:String>
+    <system:String x:Key="Lang.Action.Startup.Desc">Manage startup apps</system:String>
+    <system:String x:Key="Lang.Action.Registry">Registry Tweaks</system:String>
+    <system:String x:Key="Lang.Action.Registry.Desc">Fix registry &amp; stability</system:String>
+    <system:String x:Key="Lang.Action.Windows">Windows Tweaks</system:String>
+    <system:String x:Key="Lang.Action.Windows.Desc">Customize Windows settings</system:String>
+
+    <!-- Advanced Tools -->
+    <system:String x:Key="Lang.Tools.Advanced">Advanced Tools</system:String>
+    <system:String x:Key="Lang.Tools.VirusScan">Virus Scanner</system:String>
+    <system:String x:Key="Lang.Tools.VirusScan.Desc">Quick malware scan</system:String>
+    <system:String x:Key="Lang.Tools.RamBoost">RAM Booster</system:String>
+    <system:String x:Key="Lang.Tools.RamBoost.Desc">Free up memory</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster">System Booster</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Desc">Comprehensive system optimization</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.DisableSleep">Disable System Sleep &amp; Standby</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.DisableHiber">Disable Hibernation (powercfg -h off)</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.HighPerf">Enable High Performance Power Plan</system:String>
+    
+    <!-- System Booster UI -->
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Desktop">Desktop &amp; Explorer</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Network">Network &amp; DNS</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Power">Power &amp; Sleep</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Stability">Stability &amp; Cache</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Cat.Advanced">Advanced Tweaks</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.Desktop">Desktop &amp; Explorer Optimization</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.DesktopDesc">Optimize system interface and visual responsiveness.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.NetworkDesc">Optimize internet connection and DNS settings.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.PowerDesc">Manage power plans for maximum performance.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Header.StabilityDesc">Clean junk files and improve system stability.</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Visuals.Title">Visual Effects Optimization</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Visuals.Desc">Disable complex animations to improve UI speed.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Telemetry.Title">Telemetry &amp; Tracking</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Telemetry.Desc">Stop Windows from sending diagnostic data.</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Net.Title">TCP/IP Autotuning</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Net.Desc">Optimize network buffers for faster downloads.</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Sleep.Title">Disable Sleep &amp; Standby</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Sleep.Desc">Keep the system running at all times.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Hiber.Title">Turn Off Hibernation</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Hiber.Desc">Free up gigabytes of disk space.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Power.Title">Ultimate Performance Plan</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Power.Desc">Force CPU to run at maximum speed.</system:String>
+
+    <system:String x:Key="Lang.Tools.SystemBooster.Temp.Title">System Temp Files</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.Temp.Desc">Clean Windows and User temporary folders.</system:String>
+    <system:String x:Key="Lang.Tools.SystemBooster.BtnOptimize">OPTIMIZE NOW</system:String>
+
+    <system:String x:Key="Lang.Tools.Monitor">System Monitor</system:String>
+    <system:String x:Key="Lang.Tools.Monitor.Desc">View resource details</system:String>
+
+    <!-- File Recovery UI -->
+    <system:String x:Key="Lang.Recovery.Title">File Recovery &amp; Unformat</system:String>
+    <system:String x:Key="Lang.Recovery.SelectDrive">Select Drive to Scan</system:String>
+    <system:String x:Key="Lang.Recovery.ScanBtn">SCAN NOW</system:String>
+    <system:String x:Key="Lang.Recovery.RecoverBtn">RECOVER SELECTED</system:String>
+    <system:String x:Key="Lang.Recovery.Scanning">Scanning for lost files...</system:String>
+    <system:String x:Key="Lang.Recovery.FoundFiles">Files Found:</system:String>
+    <system:String x:Key="Lang.Recovery.Status">Health</system:String>
+    <system:String x:Key="Lang.Recovery.Size">Size</system:String>
+    <system:String x:Key="Lang.Recovery.Date">Date Deleted</system:String>
+    <system:String x:Key="Lang.Recovery.Path">Original Path</system:String>
+    <system:String x:Key="Lang.Recovery.Output">Output Folder:</system:String>
+    <system:String x:Key="Lang.Recovery.Browse">Browse...</system:String>
+
+
+    <!-- Panels -->
+    <system:String x:Key="Lang.Panel.Cleanup">Cleanup Tools</system:String>
+    <system:String x:Key="Lang.Panel.Optimize">Optimization Tools</system:String>
+    <system:String x:Key="Lang.Panel.System">System Tools</system:String>
+    <system:String x:Key="Lang.Panel.GameMode">Graphics Mode Ultra</system:String>
+    <system:String x:Key="Lang.Panel.Privacy">Privacy Guardian</system:String>
+    <system:String x:Key="Lang.Panel.Benchmark">Performance Benchmark</system:String>
+    <system:String x:Key="Lang.Nav.Benchmark">Benchmark</system:String>
+    
+    <!-- Footer Tooltips -->
+    <system:String x:Key="Lang.Footer.DiskCleanup">Disk Cleanup</system:String>
+    <system:String x:Key="Lang.Footer.Registry">Registry Cleaner</system:String>
+    <system:String x:Key="Lang.Footer.Startup">Startup Manager</system:String>
+    <system:String x:Key="Lang.Footer.Privacy">Privacy</system:String>
+    <system:String x:Key="Lang.Footer.Files">Files</system:String>
+    <system:String x:Key="Lang.Footer.System">System Tools</system:String>
+    <system:String x:Key="Lang.Footer.Search">Search</system:String>
+    <system:String x:Key="Lang.Footer.Updates">Updates</system:String>
+    <system:String x:Key="Lang.Footer.SmartScan">AI Smart Scan</system:String>
+
+    <!-- Additional Nav -->
+    <system:String x:Key="Lang.Nav.Privacy">Privacy</system:String>
+    <system:String x:Key="Lang.Nav.Files">Files</system:String>
+
+    <!-- Status -->
+    <system:String x:Key="Lang.Status.Normal">● Normal</system:String>
+    <system:String x:Key="Lang.Status.Secure">● Secure</system:String>
+    
+    <!-- Tools Descs -->
+    <system:String x:Key="Lang.Tools.MemoryOpt">Memory Optimizer</system:String>
+    <system:String x:Key="Lang.Tools.MemoryOpt.Desc">Free up memory and improve performance</system:String>
+    <system:String x:Key="Lang.Tools.SysInfo">System Info</system:String>
+    <system:String x:Key="Lang.Tools.SysInfo.Desc">View system hardware details</system:String>
+    <system:String x:Key="Lang.Tools.Registry.Desc2">Fix errors and clean Registry</system:String>
+
+    <!-- Settings -->
+    <system:String x:Key="Lang.Settings.Title">Settings</system:String>
+    <system:String x:Key="Lang.Settings.General">General</system:String>
+    <system:String x:Key="Lang.Settings.Language">Language</system:String>
+    <system:String x:Key="Lang.Settings.AutoStart">Run at startup</system:String>
+    <system:String x:Key="Lang.Settings.MinimizeTray">Minimize to System Tray</system:String>
+    <system:String x:Key="Lang.Settings.Security">Security</system:String>
+    <system:String x:Key="Lang.Settings.RealTime">Real-time Protection</system:String>
+    <system:String x:Key="Lang.Settings.RealTime.Desc">Automatically scan new files.</system:String>
+    <system:String x:Key="Lang.Settings.Advanced">Advanced Tools</system:String>
+    <system:String x:Key="Lang.Settings.WinUpdate">Windows Update Service</system:String>
+    <system:String x:Key="Lang.Settings.WinUpdate.Desc">Enable/Disable Windows Auto-Update</system:String>
+    <system:String x:Key="Lang.Settings.PrinterFix">Fix Network Printer Error (0x0x0000011b)</system:String>
+
+    <!-- Login Window -->
+    <system:String x:Key="Lang.Login.Title">LOGIN</system:String>
+    <system:String x:Key="Lang.Login.Welcome">Welcome Back!</system:String>
+    <system:String x:Key="Lang.Login.Subtitle">Sign in to continue</system:String>
+    <system:String x:Key="Lang.Login.Username">USERNAME</system:String>
+    <system:String x:Key="Lang.Login.Password">PASSWORD</system:String>
+    <system:String x:Key="Lang.Login.Button">LOGIN</system:String>
+    <system:String x:Key="Lang.Login.Forgot">Forgot Password?</system:String>
+
+    <!-- Register Window -->
+    <system:String x:Key="Lang.Register.Tab">REGISTER</system:String>
+    <system:String x:Key="Lang.Register.Title">Create Account</system:String>
+    <system:String x:Key="Lang.Register.Subtitle">14 days free trial</system:String>
+    <system:String x:Key="Lang.Register.Email">EMAIL</system:String>
+    <system:String x:Key="Lang.Register.Button">CREATE ACCOUNT</system:String>
+    <system:String x:Key="Lang.Register.Benefits">🎁 You will get:</system:String>
+    <system:String x:Key="Lang.Register.Benefit1">14 days free trial</system:String>
+    <system:String x:Key="Lang.Register.Benefit2">Full feature access</system:String>
+    <system:String x:Key="Lang.Register.Benefit3">Secure BCrypt encryption</system:String>
+
+    <!-- Branding & Features -->
+    <system:String x:Key="Lang.Brand.Slogan">Ultimate System Care</system:String>
+    <system:String x:Key="Lang.Brand.Copyright">© 2026 AVASecurity. All rights reserved.</system:String>
+    <system:String x:Key="Lang.Feature.Boost">Boost System 300%</system:String>
+    <system:String x:Key="Lang.Feature.Malware">Malware Protection</system:String>
+    <system:String x:Key="Lang.Feature.Clean">Smart Cleaner</system:String>
+    <system:String x:Key="Lang.Feature.Support">Support 24/7</system:String>
+
+    <!-- Messages -->
+    <system:String x:Key="Lang.Msg.LoginSuccess">Login Successful! Dashboard unlocked.</system:String>
+    <system:String x:Key="Lang.Msg.StartScan">Starting Quick Scan...</system:String>
+    <system:String x:Key="Lang.Msg.ScanComplete">Scan complete.</system:String>
+    <system:String x:Key="Lang.Msg.Welcome">Welcome</system:String>
+    <system:String x:Key="Lang.Msg.Cleaning">Cleaning...</system:String>
+    <system:String x:Key="Lang.Msg.Scanning">Scanning...</system:String>
+
+    <!-- Disk Cleanup Window -->
+    <system:String x:Key="Lang.DiskCleanup.TotalSize">Total storage to free up</system:String>
+    <system:String x:Key="Lang.DiskCleanup.FilesSelected">{0} files selected</system:String>
+    <system:String x:Key="Lang.DiskCleanup.CategoryCount">{0} categories selected</system:String>
+    <system:String x:Key="Lang.DiskCleanup.IncludeRecycle">Include Recycle Bin</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Scan">Rescan</system:String>
+    <system:String x:Key="Lang.DiskCleanup.CleanNow">Clean Now</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Categories">CATEGORIES</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Details">File Details</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Items">{0} items</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Select">Select:</system:String>
+    <system:String x:Key="Lang.DiskCleanup.All">All</system:String>
+    <system:String x:Key="Lang.DiskCleanup.None">None</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Default">Default</system:String>
+    <system:String x:Key="Lang.DiskCleanup.ConfirmTitle">Confirm Deletion</system:String>
+    <system:String x:Key="Lang.DiskCleanup.ConfirmMsg">Permanently delete selected files? This cannot be undone.</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Cleaning">Cleaning...</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Scanning">Scanning...</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Ready">Ready</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Complete">Cleanup complete</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Apps">Applications</system:String>
+    <system:String x:Key="Lang.DiskCleanup.System">System</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Preview">Preview</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Modified">Date Modified</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Name">Name</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Size">Size</system:String>
+    <system:String x:Key="Lang.DiskCleanup.Type">Type</system:String>
+    <system:String x:Key="Lang.DiskCleanup.NoPreview">No Preview Available</system:String>
+
+</ResourceDictionary>

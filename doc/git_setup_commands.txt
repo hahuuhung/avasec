@@ -1,0 +1,72 @@
+============================================================
+HƯỚNG DẪN KẾT NỐI GITHUB CHO SYSANTI
+GITHUB CONNECTION GUIDE FOR SYSANTI
+============================================================
+
+BÁC 1: THÊM REMOTE REPOSITORY
+STEP 1: ADD REMOTE REPOSITORY
+------------------------------------------------------------
+# Thay YOUR_GITHUB_USERNAME bằng username GitHub của bạn
+# Replace YOUR_GITHUB_USERNAME with your GitHub username
+
+git remote add origin https://github.com/hahuuhung/SysAnti.git
+
+# Kiểm tra remote đã được thêm
+# Check if remote was added
+git remote -v
+
+
+BƯỚC 2: COMMIT CODE (nếu chưa commit)
+STEP 2: COMMIT CODE (if not committed yet)
+------------------------------------------------------------
+git commit -m "Initial commit: SysAnti project setup"
+
+
+BƯỚC 3: ĐỔI TÊN BRANCH TỪ 'mainclone' SANG 'main'
+STEP 3: RENAME BRANCH FROM 'mainclone' TO 'main'
+------------------------------------------------------------
+git branch -M main
+
+
+BƯỚC 4: PUSH CODE LÊN GITHUB
+STEP 4: PUSH CODE TO GITHUB
+------------------------------------------------------------
+git push -u origin main
+
+# Khi được hỏi:
+# When prompted:
+# Username: hahuuhung@gmail.com
+# Password: [DÁN PERSONAL ACCESS TOKEN Ở ĐÂY / PASTE YOUR PERSONAL ACCESS TOKEN HERE]
+#           (Token bắt đầu bằng ghp_xxxxx)
+
+
+============================================================
+LƯU Ý QUAN TRỌNG / IMPORTANT NOTES
+============================================================
+
+⚠️ KHI PUSH, HỆ THỐNG SẼ HỎI:
+   - Username for 'https://github.com': hahuuhung@gmail.com
+   - Password for 'https://hahuuhung@gmail.com@github.com': 
+     👉 NHẬP PERSONAL ACCESS TOKEN (KHÔNG PHẢI MẬT KHẨU GITHUB!)
+     👉 ENTER YOUR PERSONAL ACCESS TOKEN (NOT YOUR GITHUB PASSWORD!)
+
+✅ Sau lần đầu, Windows Credential Manager sẽ lưu token
+   After first time, Windows Credential Manager will save the token
+
+============================================================
+KIỂM TRA KẾT NỐI / TEST CONNECTION
+============================================================
+
+# Xem trạng thái
+# Check status
+git status
+
+# Xem remote
+# View remote
+git remote -v
+
+# Test kết nối (nếu dùng HTTPS)
+# Test connection (if using HTTPS)
+git ls-remote origin
+
+============================================================

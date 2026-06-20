@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Admin - AVA Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .credentials {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .credentials div {
+            margin: 5px 0;
+        }
+
+        .credentials strong {
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 Initialize Database</h1>
+        <p class="subtitle">Khởi tạo tài khoản Admin / Create Admin Account</p>
+
+        <button id="initBtn" class="btn" onclick="initializeAdmin()">
+            Tạo Admin User / Create Admin User
+        </button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function initializeAdmin() {
+            const btn = document.getElementById('initBtn');
+            const resultDiv = document.getElementById('result');
+
+            btn.disabled = true;
+            btn.textContent = 'Đang xử lý... / Processing...';
+            resultDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/init', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                resultDiv.className = 'result ' + (result.success ? 'success' : 'error');
+
+                if (result.success) {
+                    resultDiv.innerHTML = `
+                        <div style="font-size: 18px; margin-bottom: 10px;">✅ ${result.message}</div>
+                        ${result.credentials ? `
+                            <div class="credentials">
+                                <div><strong>Username:</strong> ${result.credentials.username}</div>
+                                <div><strong>Password:</strong> ${result.credentials.password}</div>
+                                <div><strong>Email:</strong> ${result.credentials.email}</div>
+                                ${result.licenseKey ? `<div><strong>License Key:</strong> ${result.licenseKey}</div>` : ''}
+                            </div>
+                            <div style="margin-top: 15px; color: #856404; background: #fff3cd; padding: 10px; border-radius: 5px;">
+                                ⚠️ Vui lòng lưu thông tin này! / Please save this information!<br>
+                                👉 Truy cập: <a href="/admin.html" style="color: #667eea; font-weight: bold;">http://localhost:3000/admin.html</a>
+                            </div>
+                        ` : ''}
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div style="font-size: 18px; margin-bottom: 10px;">❌ Lỗi / Error</div>
+                        <div>${result.message}</div>
+                        ${result.error ? `<div style="margin-top: 10px; font-size: 12px; opacity: 0.7;">${result.error}</div>` : ''}
+                    `;
+                }
+
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 18px; margin-bottom: 10px;">❌ Lỗi Kết Nối / Connection Error</div>
+                    <div>Không thể kết nối đến server. Vui lòng kiểm tra:</div>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Server đang chạy (npm start)</li>
+                        <li>MySQL đang hoạt động</li>
+                        <li>Database 'avasec_db' đã được tạo</li>
+                    </ul>
+                `;
+                resultDiv.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Tạo Admin User / Create Admin User';
+            }
+        }
+    </script>
+</body>
+
+</html>

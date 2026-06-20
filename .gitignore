@@ -1,0 +1,45 @@
+# Build / .NET
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+publish/
+Publish/
+*.user
+*.suo
+*.cache
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Secrets & local env
+.env
+.env.local
+*.pfx
+appsettings.*.local.json
+
+# IDE
+.vs/
+.idea/
+*.swp
+*~
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs & temp
+*.log
+startup_error.txt
+[Tt]emp/
+[Tt]mp/
+
+# Installer output
+Output/
+
+# Test / coverage
+TestResults/
+coverage/
+*.trx

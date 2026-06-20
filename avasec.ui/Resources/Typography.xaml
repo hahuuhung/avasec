@@ -1,0 +1,203 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- =========================================== -->
+    <!-- AVA Security Typography - Advanced SystemCare Style -->
+    <!-- Kiểu Chữ AVA Security - Phong cách Advanced SystemCare -->
+    <!-- =========================================== -->
+
+    <!-- Display Headings / Tiêu đề Lớn -->
+    <Style x:Key="DisplayHeadingStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="LineHeight" Value="40"/>
+    </Style>
+
+    <!-- Heading 1 / Tiêu đề 1 -->
+    <Style x:Key="Heading1Style" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+    </Style>
+
+    <!-- Heading 2 / Tiêu đề 2 -->
+    <Style x:Key="Heading2Style" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,12"/>
+    </Style>
+
+    <!-- Heading 3 / Tiêu đề 3 -->
+    <Style x:Key="Heading3Style" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <!-- Heading 4 / Tiêu đề 4 -->
+    <Style x:Key="Heading4Style" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <!-- Body Text / Văn bản Chính -->
+    <Style x:Key="BodyTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="LineHeight" Value="22"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Body Large / Văn bản Lớn -->
+    <Style x:Key="BodyLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="LineHeight" Value="24"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Body Small / Văn bản Nhỏ -->
+    <Style x:Key="SmallStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="LineHeight" Value="18"/>
+    </Style>
+
+    <!-- Caption / Chú thích -->
+    <Style x:Key="CaptionStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        <Setter Property="LineHeight" Value="16"/>
+    </Style>
+
+    <!-- Label / Nhãn -->
+    <Style x:Key="LabelStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <!-- Stat Number - Large Numbers / Số Thống kê -->
+    <Style x:Key="StatNumberStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentTealBrush}"/>
+    </Style>
+
+    <!-- Stat Label / Nhãn Thống kê -->
+    <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
+
+    <!-- Link Text / Văn bản Liên kết -->
+    <Style x:Key="LinkTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBlueLightBrush}"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Success Text / Văn bản Thành công -->
+    <Style x:Key="SuccessTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+    </Style>
+
+    <!-- Warning Text / Văn bản Cảnh báo -->
+    <Style x:Key="WarningTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+    </Style>
+
+    <!-- Error Text / Văn bản Lỗi -->
+    <Style x:Key="ErrorTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
+    </Style>
+
+    <!-- Code Text / Văn bản Mã -->
+    <Style x:Key="CodeTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Consolas, Courier New, monospace"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentTealBrush}"/>
+        <Setter Property="Background" Value="#0D1520"/>
+        <Setter Property="Padding" Value="8,4"/>
+    </Style>
+
+    <!-- Accent Text / Văn bản Nhấn -->
+    <Style x:Key="AccentTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBlueLightBrush}"/>
+    </Style>
+
+    <!-- Muted Text / Văn bản Mờ -->
+    <Style x:Key="MutedTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+    </Style>
+
+    <!-- Badge Text / Văn bản Huy hiệu -->
+    <Style x:Key="BadgeTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Title Bar Text / Văn bản Thanh Tiêu đề -->
+    <Style x:Key="TitleBarTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Menu Text / Văn bản Menu -->
+    <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Inter, Arial"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+    </Style>
+
+</ResourceDictionary>

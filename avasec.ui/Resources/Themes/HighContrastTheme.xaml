@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- High contrast theme for accessibility -->
+    <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="ThemeSurfaceBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="ThemeSidebarBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="ThemeContentBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="ThemeCardBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="ThemeTextPrimaryBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ThemeTextSecondaryBrush" Color="#FFFF00"/>
+    <SolidColorBrush x:Key="ThemeTextMutedBrush" Color="#CCCCCC"/>
+    <SolidColorBrush x:Key="ThemeBorderBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="LightBgBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="CardBgBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="SidebarBgBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="ContentBgBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#FFFF00"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="BorderGlowBrush" Color="#FFFF00"/>
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#0000FF"/>
+    <SolidColorBrush x:Key="AccentBlueBrush" Color="#00FFFF"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="#00FF00"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="#FF0000"/>
+    <SolidColorBrush x:Key="DarkSurfaceBrush" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="MainBackgroundGradient" Color="#000000"/>
+</ResourceDictionary>

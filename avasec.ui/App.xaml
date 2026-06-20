@@ -1,0 +1,26 @@
+<Application x:Class="AVASec.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:AVASec.UI.Converters"
+             >
+    <Application.Resources>
+        <!-- Merge Design System Resources / Hợp nhất Tài nguyên Hệ thống Thiết kế -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Themes/LightTheme.xaml"/>
+                <ResourceDictionary Source="Resources/Typography.xaml"/>
+                <ResourceDictionary Source="Resources/Languages/vi-VN.xaml"/>
+                <ResourceDictionary Source="Resources/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Resources/CardStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Controls.xaml"/>
+                <ResourceDictionary Source="Resources/Animations.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Converters / Bộ chuyển đổi -->
+            <converters:ProgressToWidthConverter x:Key="ProgressToWidthConverter"/>
+            <converters:BoolToAlignmentConverter x:Key="BoolToAlignmentConverter"/>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

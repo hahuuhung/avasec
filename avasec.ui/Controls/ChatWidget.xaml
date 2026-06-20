@@ -1,0 +1,173 @@
+<UserControl x:Class="AVASec.UI.Controls.ChatWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="350" Height="500">
+    
+    <!--
+        Chat Widget - Real-time chat support
+        Widget Chat - Hỗ trợ chat thời gian thực
+    -->
+    
+    <Border Style="{StaticResource BaseCardStyle}"
+            CornerRadius="12"
+            Padding="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Header / Tiêu đề -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource PrimaryGradientBrush}"
+                    CornerRadius="12,12,0,0"
+                    Padding="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Icon -->
+                    <TextBlock Grid.Column="0"
+                              Text="💬"
+                              FontSize="24"
+                              VerticalAlignment="Center"
+                              Margin="0,0,12,0"/>
+                    
+                    <!-- Title -->
+                    <StackPanel Grid.Column="1" 
+                               VerticalAlignment="Center">
+                        <TextBlock Text="AVA Security Support"
+                                  Style="{StaticResource Heading3Style}"
+                                  Foreground="White"/>
+                        <TextBlock Text="Online / Trực tuyến" 
+                                  x:Name="StatusText"
+                                  Style="{StaticResource SmallStyle}"
+                                  Foreground="White"
+                                  Opacity="0.9"/>
+                    </StackPanel>
+                    
+                    <!-- Close Button -->
+                    <Button Grid.Column="2"
+                           Style="{StaticResource IconButtonStyle}"
+                           Click="CloseButton_Click"
+                           Background="Transparent">
+                        <TextBlock Text="×" 
+                                  FontSize="24" 
+                                  Foreground="White"/>
+                    </Button>
+                </Grid>
+            </Border>
+            
+            <!-- Messages Area / Khu vực Tin nhắn -->
+            <ScrollViewer Grid.Row="1"
+                         x:Name="MessagesScrollViewer"
+                         VerticalScrollBarVisibility="Auto"
+                         Padding="16"
+                         Background="{StaticResource BackgroundBrush}">
+                <ItemsControl x:Name="MessagesContainer">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,12"
+                                   MaxWidth="280"
+                                   HorizontalAlignment="{Binding IsBot, Converter={StaticResource BoolToAlignmentConverter}}">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                        <Setter Property="CornerRadius" Value="12"/>
+                                        <Setter Property="Padding" Value="12"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsBot}" Value="False">
+                                                <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                
+                                <StackPanel>
+                                    <!-- User Name -->
+                                    <TextBlock Text="{Binding UserName}"
+                                              Style="{StaticResource SmallStyle}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,4"/>
+                                    
+                                    <!-- Message -->
+                                    <TextBlock Text="{Binding Message}"
+                                              Style="{StaticResource BodyStyle}"
+                                              TextWrapping="Wrap"/>
+                                    
+                                    <!-- Timestamp -->
+                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                              Style="{StaticResource TinyStyle}"
+                                              HorizontalAlignment="Right"
+                                              Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <!-- Input Area / Khu vực Nhập liệu -->
+            <Border Grid.Row="2"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,1,0,0"
+                    Padding="16"
+                    Background="{StaticResource SurfaceBrush}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Text Input -->
+                    <TextBox Grid.Column="0"
+                            x:Name="MessageInput"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            Padding="12"
+                            VerticalContentAlignment="Center"
+                            FontSize="14"
+                            Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged}"
+                            KeyDown="MessageInput_KeyDown">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <Border Background="{TemplateBinding Background}"
+                                                   BorderBrush="{TemplateBinding BorderBrush}"
+                                                   BorderThickness="{TemplateBinding BorderThickness}"
+                                                   CornerRadius="20">
+                                                <ScrollViewer x:Name="PART_ContentHost"
+                                                            Margin="{TemplateBinding Padding}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    
+                    <!-- Send Button -->
+                    <Button Grid.Column="1"
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Width="60"
+                           Height="40"
+                           Margin="8,0,0,0"
+                           Click="SendButton_Click">
+                        <TextBlock Text="Send"/>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
